@@ -1,14 +1,19 @@
+import React, { useState } from "react";
 import "./styles/css/styles.css";
 import { BsGithub, BsInstagram, BsHeartFill } from "react-icons/bs";
+import PopupWindow from "./components/PopupWindow";
 
 function App() {
+  const [trigger, setTrigger] = useState(false);
   return (
-    <div className="Todo">
+    <div className="todo">
       <header className="title-container">
         <h1>Simple ToDo App</h1>
       </header>
       <div className="create-button-container">
-        <button className="create-btn">Create New Task</button>
+        <button className="create-btn" onClick={() => setTrigger(true)}>
+          Create New Task
+        </button>
       </div>
       <div className="filter-sort-container">
         <div className="filter-by-list-container"></div>
@@ -18,6 +23,7 @@ function App() {
         <div className="task-name-container"></div>
         <div className="task-info-container"></div>
       </main>
+      <PopupWindow trigger={trigger} setTrigger={setTrigger} />
       <footer>
         <div className="footer-container">
           <div className="social-icons-container">
