@@ -1,0 +1,13 @@
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font: 1rem/1.5 "Cormorant Garamond", serif;
+  background-color: $background-primary-color;
+  color: $primary-text-color;
+}
