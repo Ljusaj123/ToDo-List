@@ -15,16 +15,12 @@ body {
 h1,
 h2 {
   color: $headers-text-color;
-}
-h1 {
-  font-size: 3rem;
   margin-bottom: 1rem;
   line-height: 1.25;
 }
-h2 {
-  font-size: 2rem;
-  margin-bottom: 0.75rem;
-  line-height: 1.15;
+p {
+  margin-bottom: 1rem;
+  color: $paragraph-text-color;
 }
 
 ul {
@@ -32,9 +28,4 @@ ul {
 }
 a {
   text-decoration: none;
-}
-
-p {
-  margin-bottom: 1.25rem;
-  color: $paragraph-text-color;
 }
