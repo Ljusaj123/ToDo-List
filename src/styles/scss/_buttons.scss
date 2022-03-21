@@ -17,7 +17,7 @@ button {
 .create-btn {
   border-radius: 10px;
   background-color: $light-pink;
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-size: clamp(1rem, 2vw, 1.3rem);
 }
 
 .popup-btn {
@@ -34,4 +34,12 @@ button {
 
 .no-task-btn {
   cursor: not-allowed;
+  border-radius: 10px;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+}
+
+.delete-btn {
+  background: $dark-red;
+  border-radius: 15px;
+  font-size: clamp(1rem, 2vw, 1.2rem);
 }
