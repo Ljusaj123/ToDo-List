@@ -1,3 +1,4 @@
+@import "./mixins";
 *,
 ::after,
 ::before {
@@ -8,19 +9,18 @@
 
 body {
   font: 1rem/1.5 "Cormorant Garamond", serif;
-  background-color: $background-primary-color;
-  color: $text-color;
+  background-color: $dark-red;
 }
 
 h1,
 h2 {
-  color: $headers-text-color;
+  color: $some-pink;
   margin-bottom: 1rem;
   line-height: 1.25;
 }
 p {
   margin-bottom: 1rem;
-  color: $paragraph-text-color;
+  color: $light-white-pink;
 }
 
 ul {
@@ -28,4 +28,9 @@ ul {
 }
 a {
   text-decoration: none;
+}
+
+header {
+  width: 100%;
+  @include universal-flex-display(center, center);
 }

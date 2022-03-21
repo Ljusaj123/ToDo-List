@@ -13,7 +13,7 @@
   &-container {
     height: fit-content;
     width: clamp(320px, 80%, 700px);
-    background-color: $background-primary-color;
+    background-color: $dark-red;
     border-radius: 15px;
     position: relative;
 
@@ -30,7 +30,7 @@
       & svg {
         font-size: 2rem;
         cursor: pointer;
-        color: $paragraph-text-color;
+        color: $light-white-pink;
       }
     }
 
@@ -47,11 +47,11 @@
         background: none;
         outline: none;
         border: none;
-        border-bottom: 1px solid $button-background-color;
+        border-bottom: 1px solid $light-pink;
         line-height: 2;
 
         &[placeholder] {
-          color: $paragraph-text-color;
+          color: $light-white-pink;
           font-size: clamp(0.9rem, 2.5vw, 1.3rem);
         }
       }
@@ -62,12 +62,12 @@
         background: none;
         width: clamp(280px, 70%, 400px);
         min-height: 10rem;
-        border-color: $button-background-color;
+        border-color: $light-pink;
         padding: 0.5rem;
         outline: none;
 
         &[placeholder] {
-          color: $paragraph-text-color;
+          color: $light-white-pink;
           font-size: clamp(0.75rem, 2.5vw, 1rem);
         }
       }
