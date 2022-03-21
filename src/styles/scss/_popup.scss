@@ -1,0 +1,86 @@
+@import "./mixins";
+
+.popup {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  @include universal-flex-display(center, center);
+
+  &-container {
+    height: fit-content;
+    width: clamp(320px, 80%, 700px);
+    background-color: $background-primary-color;
+    border-radius: 15px;
+    position: relative;
+
+    & .popup-title-container {
+      padding: 1rem 0;
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+    }
+
+    .close-popup-container {
+      position: absolute;
+      top: 2%;
+      right: 2%;
+
+      & svg {
+        font-size: 2rem;
+        cursor: pointer;
+        color: $paragraph-text-color;
+      }
+    }
+
+    & .container {
+      width: 100%;
+      padding: 1rem;
+      @include universal-flex-display(center, center);
+      margin-bottom: 2rem;
+    }
+
+    & .task-name {
+      & input {
+        width: clamp(280px, 70%, 400px);
+        background: none;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid $button-background-color;
+        line-height: 2;
+
+        &[placeholder] {
+          color: $paragraph-text-color;
+          font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+        }
+      }
+    }
+
+    & .task-description {
+      & textarea {
+        background: none;
+        width: clamp(280px, 70%, 400px);
+        min-height: 10rem;
+        border-color: $button-background-color;
+        padding: 0.5rem;
+        outline: none;
+
+        &[placeholder] {
+          color: $paragraph-text-color;
+          font-size: clamp(0.75rem, 2.5vw, 1rem);
+        }
+      }
+    }
+
+    .day-list {
+      & button:nth-child(1) {
+        margin-right: 2rem;
+      }
+    }
+
+    & .new-task {
+      padding: 0rem;
+    }
+  }
+}
