@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import DaysPopupWindow from "./DaysPopupWindow";
+import ListPopupWindow from "./ListPopupWindow";
 
 function PopupWindow({ trigger, setTrigger }) {
+  const [listTrigger, setListTrigger] = useState(false);
+  const [dayTrigger, setDayTrigger] = useState(false);
   return (
     <>
       {trigger ? (
@@ -23,8 +27,26 @@ function PopupWindow({ trigger, setTrigger }) {
               <textarea placeholder="Enter notes..."></textarea>
             </div>
             <div className="day-list container">
-              <button className="select-btn">Select day</button>
-              <button className="select-btn">Select list</button>
+              <button
+                className="select-btn"
+                onClick={() => setDayTrigger(true)}
+              >
+                Select day
+              </button>
+              <DaysPopupWindow
+                trigger={dayTrigger}
+                setTrigger={setDayTrigger}
+              />
+              <button
+                className="select-btn"
+                onClick={() => setListTrigger(true)}
+              >
+                Select list
+              </button>
+              <ListPopupWindow
+                trigger={listTrigger}
+                setTrigger={setListTrigger}
+              />
             </div>
 
             <div className="new-task container">
