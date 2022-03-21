@@ -74,8 +74,17 @@
     }
 
     .day-list {
-      & button:nth-child(1) {
-        margin-right: 2rem;
+      & .day-container,
+      & .list-container {
+        width: 50%;
+        @include universal-flex-display(space-evenly, center);
+        flex-direction: column;
+
+        & p {
+          margin-top: 0.5rem;
+          width: 50%;
+          text-align: center;
+        }
       }
     }
 
@@ -87,24 +96,6 @@
       padding: 1rem;
       height: 90%;
       width: 100%;
-
-      & .list-container {
-        width: 100%;
-        @include universal-flex-display(center, center);
-        padding: 1rem 0;
-        cursor: pointer;
-        margin: 0.5rem 0;
-        border-radius: 10px;
-        transition: all 0.5s ease;
-
-        &:hover {
-          background-color: $medium-pink;
-        }
-
-        & p {
-          font-size: 1.5rem;
-        }
-      }
     }
   }
 }
