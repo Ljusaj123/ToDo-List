@@ -5,6 +5,7 @@ import PopupWindow from "./components/PopupWindow";
 
 function App() {
   const [trigger, setTrigger] = useState(false);
+  const [taskList, setTasklist] = useState([]);
   return (
     <div className="todo">
       <header className="title-container">
@@ -23,7 +24,12 @@ function App() {
         <div className="task-name-container"></div>
         <div className="task-info-container"></div>
       </main>
-      <PopupWindow trigger={trigger} setTrigger={setTrigger} />
+      <PopupWindow
+        trigger={trigger}
+        setTrigger={setTrigger}
+        taskList={taskList}
+        setTaskList={setTasklist}
+      />
       <footer>
         <div className="footer-container">
           <div className="social-icons-container">
