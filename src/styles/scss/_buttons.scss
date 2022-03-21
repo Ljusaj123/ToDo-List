@@ -19,3 +19,19 @@ button {
   background-color: $light-pink;
   font-size: clamp(1rem, 2vw, 1.5rem);
 }
+
+.popup-btn {
+  width: 100%;
+  background: none;
+  margin: 0.5rem 0;
+  border-radius: 10px;
+  font-size: 1.2rem;
+
+  &:hover {
+    background-color: $medium-pink;
+  }
+}
+
+.no-task-btn {
+  cursor: not-allowed;
+}
