@@ -1,0 +1,21 @@
+button {
+  padding: 1rem;
+  border: none;
+  color: $light-white-pink;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+.select-btn {
+  border-radius: 15px;
+  background-color: $medium-pink;
+  font-size: clamp(0.75rem, 2vw, 1.1rem);
+}
+.create-btn {
+  border-radius: 10px;
+  background-color: $light-pink;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+}
