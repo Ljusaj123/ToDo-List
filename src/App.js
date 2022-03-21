@@ -8,6 +8,17 @@ function App() {
   const [taskList, setTasklist] = useState([]);
   const [singleTask, setSingleTask] = useState("");
 
+  const handleDelete = () => {
+    const newList = taskList.filter((task) => {
+      return task !== singleTask;
+    });
+
+    console.log(newList);
+
+    setTasklist(newList);
+    setSingleTask("");
+  };
+
   return (
     <div className="todo">
       <header className="title-container">
@@ -44,20 +55,31 @@ function App() {
           <header>
             <h1>Task Info</h1>
           </header>
-          <div className="task-info">
-            <h2>Task name:</h2>
-            <p>{singleTask.name}</p>
-            <h2>Notes:</h2>
-            <p>{singleTask.notes}</p>
-            <h2>Day:</h2>
-            <p>{singleTask.day}</p>
-            <h2>List:</h2>
-            <p>{singleTask.list}</p>
-          </div>
-          <div className="buttons-container">
-            <button className="create-btn">Check as done</button>
-            <button className="delete-btn">Delete</button>
-          </div>
+
+          {singleTask ? (
+            <div className="task-info">
+              <h2>Task name:</h2>
+              <p>{singleTask.name}</p>
+              <h2>Notes:</h2>
+              <p>{singleTask.notes}</p>
+              <h2>Day:</h2>
+              <p>{singleTask.day}</p>
+              <h2>List:</h2>
+              <p>{singleTask.list}</p>
+            </div>
+          ) : (
+            ""
+          )}
+          {singleTask ? (
+            <div className="buttons-container">
+              <button className="create-btn">Check as done</button>
+              <button className="delete-btn" onClick={handleDelete}>
+                Delete
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </main>
       <PopupWindow
