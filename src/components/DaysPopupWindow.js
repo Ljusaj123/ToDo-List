@@ -1,7 +1,12 @@
 import React from "react";
 import days from "../const/Days";
 import { AiOutlineClose } from "react-icons/ai";
-function DaysPopupWindow({ trigger, setTrigger }) {
+function DaysPopupWindow({ trigger, setTrigger, setTask, task }) {
+  const handleSubmit = (e) => {
+    const { name, value } = e.target;
+    setTask({ ...task, [name]: value });
+    setTrigger(false);
+  };
   return (
     <>
       {trigger ? (
@@ -19,9 +24,15 @@ function DaysPopupWindow({ trigger, setTrigger }) {
             <div className="lists-container">
               {days.map((day, index) => {
                 return (
-                  <div className="list-container" key={index}>
-                    <p>{day}</p>
-                  </div>
+                  <button
+                    className="popup-btn"
+                    key={index}
+                    onClick={handleSubmit}
+                    value={day}
+                    name="day"
+                  >
+                    {day}
+                  </button>
                 );
               })}
             </div>

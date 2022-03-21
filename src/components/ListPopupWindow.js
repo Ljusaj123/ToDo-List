@@ -1,7 +1,12 @@
 import React from "react";
 import lists from "../const/List";
 import { AiOutlineClose } from "react-icons/ai";
-function ListPopupWindow({ trigger, setTrigger }) {
+function ListPopupWindow({ trigger, setTrigger, setTask, task }) {
+  const handleSubmit = (e) => {
+    const { name, value } = e.target;
+    setTask({ ...task, [name]: value });
+    setTrigger(false);
+  };
   return (
     <>
       {trigger ? (
@@ -16,18 +21,18 @@ function ListPopupWindow({ trigger, setTrigger }) {
             >
               <AiOutlineClose />
             </div>
-            <div
-              className="close-popup-container"
-              onClick={() => setTrigger(false)}
-            >
-              <AiOutlineClose />
-            </div>
             <div className="lists-container">
               {lists.map((list, index) => {
                 return (
-                  <div className="list-container" key={index}>
-                    <p>{list}</p>
-                  </div>
+                  <button
+                    className="popup-btn"
+                    key={index}
+                    onClick={handleSubmit}
+                    name="list"
+                    value={list}
+                  >
+                    {list}
+                  </button>
                 );
               })}
             </div>
