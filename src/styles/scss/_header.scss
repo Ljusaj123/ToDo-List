@@ -1,8 +1,6 @@
 @import "./mixins";
 
 .title-container {
-  width: 100%;
-  @include universal-flex-display(center, center);
   padding: 2rem 0;
 
   h1 {
