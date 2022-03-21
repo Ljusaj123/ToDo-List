@@ -22,8 +22,26 @@
   .task-info-container {
     height: 90%;
     width: 40%;
-    background-color: $light-white-pink;
+    background-color: $medium-pink;
     margin: 1rem;
     border-radius: 10px;
+  }
+
+  .task-container {
+    width: 100%;
+    padding: 1rem 2rem;
+    margin: 0.5rem 0;
+    @include universal-flex-display(space-between, center);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+
+    &:hover {
+      background-color: $light-pink;
+    }
+    & p {
+      font-size: 1.5rem;
+      text-align: center;
+    }
   }
 }
