@@ -3,3 +3,9 @@
   justify-content: $justify-content;
   align-items: $align-items;
 }
+
+@mixin media-750 {
+  @media screen and (max-width: 750px) {
+    @content;
+  }
+}
