@@ -6,6 +6,8 @@ import PopupWindow from "./components/PopupWindow";
 function App() {
   const [trigger, setTrigger] = useState(false);
   const [taskList, setTasklist] = useState([]);
+  const [singleTask, setSingleTask] = useState("");
+
   return (
     <div className="todo">
       <header className="title-container">
@@ -21,7 +23,23 @@ function App() {
         <div className="sort-container"></div>
       </div>
       <main className="tasks-containers">
-        <div className="task-name-container"></div>
+        <div className="task-name-container">
+          <header>
+            <h1>Task Name</h1>
+          </header>
+          {taskList.map((task, index) => {
+            return (
+              <div
+                className="task-container"
+                key={index}
+                onClick={() => setSingleTask(task)}
+              >
+                <p>{task.name}</p>
+                <p>{task.day}</p>
+              </div>
+            );
+          })}
+        </div>
         <div className="task-info-container"></div>
       </main>
       <PopupWindow
