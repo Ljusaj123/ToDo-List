@@ -16,10 +16,10 @@ function DaysPopupWindow({ trigger, setTrigger }) {
             >
               <AiOutlineClose />
             </div>
-            <div className="days-container">
+            <div className="lists-container">
               {days.map((day, index) => {
                 return (
-                  <div className="day-container" key={index}>
+                  <div className="list-container" key={index}>
                     <p>{day}</p>
                   </div>
                 );

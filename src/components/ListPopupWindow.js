@@ -16,11 +16,17 @@ function ListPopupWindow({ trigger, setTrigger }) {
             >
               <AiOutlineClose />
             </div>
-            <div className="days-container">
-              {lists.map((day, index) => {
+            <div
+              className="close-popup-container"
+              onClick={() => setTrigger(false)}
+            >
+              <AiOutlineClose />
+            </div>
+            <div className="lists-container">
+              {lists.map((list, index) => {
                 return (
-                  <div className="day-container" key={index}>
-                    <p>{day}</p>
+                  <div className="list-container" key={index}>
+                    <p>{list}</p>
                   </div>
                 );
               })}
