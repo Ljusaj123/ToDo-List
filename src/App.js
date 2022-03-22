@@ -1,23 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./styles/css/styles.css";
 import { BsGithub, BsInstagram, BsHeartFill } from "react-icons/bs";
 import PopupWindow from "./components/PopupWindow";
 
 function App() {
+  const localTodos = localStorage.getItem("tasks");
   const [trigger, setTrigger] = useState(false);
-  const [taskList, setTasklist] = useState([]);
+  const [taskList, setTasklist] = useState(
+    localTodos ? JSON.parse(localTodos) : []
+  );
   const [singleTask, setSingleTask] = useState("");
 
   const handleDelete = () => {
     const newList = taskList.filter((task) => {
       return task !== singleTask;
     });
-
-    console.log(newList);
-
     setTasklist(newList);
     setSingleTask("");
   };
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(taskList));
+  }, [taskList]);
 
   return (
     <div className="todo">
