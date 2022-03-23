@@ -19,6 +19,11 @@ function App() {
     setSingleTask("");
   };
 
+  const handleDone = (e) => {
+    const div = e.target.parentElement;
+    div.classList.toggle("crossed");
+  };
+
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(taskList));
   }, [taskList]);
@@ -49,8 +54,9 @@ function App() {
                 key={index}
                 onClick={() => setSingleTask(task)}
               >
+                <input type="checkbox" onClick={handleDone} />
                 <p>{task.name}</p>
-                <p>{task.day}</p>
+                <p className="day">{task.day}</p>
               </div>
             );
           })}
@@ -76,7 +82,6 @@ function App() {
           )}
           {singleTask ? (
             <div className="buttons-container">
-              <button className="create-btn">Check as done</button>
               <button className="delete-btn" onClick={handleDelete}>
                 Delete
               </button>
