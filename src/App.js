@@ -71,11 +71,11 @@ function App() {
               <h2>Task name:</h2>
               <p>{singleTask.name}</p>
               <h2>Notes:</h2>
-              <p>{singleTask.notes}</p>
+              <p>{singleTask.notes ? singleTask.notes : "No notes"}</p>
               <h2>Day:</h2>
               <p>{singleTask.day}</p>
               <h2>List:</h2>
-              <p>{singleTask.list}</p>
+              <p>{singleTask.list ? singleTask.list : "No list"}</p>
             </div>
           ) : (
             ""
