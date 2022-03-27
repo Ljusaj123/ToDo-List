@@ -65,8 +65,17 @@ function App() {
   const handleSelect = (e) => {
     const container = e.target.nextSibling;
     container.classList.toggle("active");
-    setShowArrowDaysOptions((prev) => !prev);
-    setShowArrowSortOptions((prev) => !prev);
+    console.log(container.id);
+    switch (container.id) {
+      case "days":
+        setShowArrowDaysOptions((prev) => !prev);
+        break;
+      case "sort":
+        setShowArrowSortOptions((prev) => !prev);
+        break;
+      default:
+        break;
+    }
   };
 
   useEffect(() => {
@@ -114,7 +123,6 @@ function App() {
 
   return (
     <div className="todo">
-      {console.log(selectValue.sort)}
       <header className="title-container">
         <h1>Simple ToDo App</h1>
       </header>
@@ -129,7 +137,7 @@ function App() {
             <p>{selectValue.days}</p>
             <p>{showArrowDaysOptions ? <BiUpArrow /> : <BiDownArrow />}</p>
           </div>
-          <div className="days-options-container">
+          <div className="days-options-container" id="days">
             {days.map((day, index) => {
               return (
                 <div className="day-option" onClick={handleOption} key={index}>
@@ -145,7 +153,7 @@ function App() {
             <p>{selectValue.sort}</p>
             <p>{showArrowSortOptions ? <BiUpArrow /> : <BiDownArrow />}</p>
           </div>
-          <div className="sort-options-container">
+          <div className="sort-options-container" id="sort">
             {sortingList.map((sort, index) => {
               return (
                 <div className="day-option" onClick={handleOption} key={index}>
