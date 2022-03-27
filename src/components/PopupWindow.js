@@ -23,7 +23,6 @@ function PopupWindow({ trigger, setTrigger, taskList, setTaskList }) {
 
   return (
     <>
-      {console.log(trigger)}
       {trigger ? (
         <div className="popup">
           <div className="popup-container">
