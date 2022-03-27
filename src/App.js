@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./styles/css/styles.css";
 import { BsGithub, BsInstagram, BsHeartFill } from "react-icons/bs";
+import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 import PopupWindow from "./components/PopupWindow";
+import days from "./const/Days";
 
 function App() {
   const localTodos = localStorage.getItem("tasks");
@@ -10,6 +12,8 @@ function App() {
     localTodos ? JSON.parse(localTodos) : []
   );
   const [singleTask, setSingleTask] = useState("");
+  const [selectValue, setSelectValue] = useState("Select Day");
+  const [showDaysOptions, setShowDaysOptions] = useState(true);
 
   const handleDelete = () => {
     const newList = taskList.filter((task) => {
@@ -22,6 +26,19 @@ function App() {
   const handleDone = (e) => {
     const div = e.target.parentElement;
     div.classList.toggle("crossed");
+  };
+
+  const handleOption = (e) => {
+    const name = e.target.children[1].innerHTML;
+    console.log(name);
+    setSelectValue(name);
+    const container = e.target.parentElement;
+    container.classList.remove("active");
+  };
+  const handleSelect = (e) => {
+    const container = e.target.nextSibling;
+    container.classList.toggle("active");
+    setShowDaysOptions((prev) => !prev);
   };
 
   useEffect(() => {
@@ -39,7 +56,22 @@ function App() {
         </button>
       </div>
       <div className="filter-sort-container">
-        <div className="filter-by-list-container"></div>
+        <div className="filter-by-day-container">
+          <div className="selected" onClick={handleSelect}>
+            <p>{selectValue}</p>
+            <p>{showDaysOptions ? <BiDownArrow /> : <BiUpArrow />}</p>
+          </div>
+          <div className="days-options-container">
+            {days.map((day, index) => {
+              return (
+                <div className="day-option" onClick={handleOption} key={index}>
+                  <input type="radio" className="radio" id={day} name="days" />
+                  <label>{day}</label>
+                </div>
+              );
+            })}
+          </div>
+        </div>
         <div className="sort-container"></div>
       </div>
       <main className="tasks-containers">
