@@ -98,6 +98,17 @@
     background-color: $medium-pink;
     margin: 1rem;
     border-radius: 10px;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+      background: $light-pink;
+      border-radius: 0 1rem 1rem 0;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $light-white-pink;
+      border-radius: 0 1rem 1rem 0;
+    }
   }
 
   .task-container {
