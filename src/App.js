@@ -9,7 +9,7 @@ import sortingList from "./const/SortingList";
 function App() {
   const localTodos = localStorage.getItem("tasks");
   const [trigger, setTrigger] = useState(false);
-  const [taskList, setTasklist] = useState(
+  const [taskList, setTaskList] = useState(
     localTodos ? JSON.parse(localTodos) : []
   );
   const [singleTask, setSingleTask] = useState("");
@@ -24,7 +24,7 @@ function App() {
     const newList = taskList.filter((task) => {
       return task !== singleTask;
     });
-    setTasklist(newList);
+    setTaskList(newList);
     setSingleTask("");
   };
 
@@ -50,9 +50,62 @@ function App() {
       default:
         break;
     }
+    switch (selectValue.sort) {
+      case "Name (A-Z)":
+        setTaskList(taskList.sort(NameAZ));
+        break;
+      case "Name (Z-A)":
+        setTaskList(taskList.sort(NameZA));
+        break;
+      case "Day (A-Z)":
+        setTaskList(taskList.sort(DayAZ));
+        break;
+      case "Day (Z-A)":
+        setTaskList(taskList.sort(DayZA));
+        break;
+      default:
+        break;
+    }
 
     const container = e.target.parentElement;
     container.classList.remove("active");
+  };
+
+  const NameZA = (a, b) => {
+    if (a.name > b.name) {
+      return 1;
+    } else if (b.name > a.name) {
+      return -1;
+    } else {
+      return 0;
+    }
+  };
+  const NameAZ = (a, b) => {
+    if (a.name > b.name) {
+      return -1;
+    } else if (b.name > a.name) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
+  const DayAZ = (a, b) => {
+    if (a.day > b.day) {
+      return -1;
+    } else if (b.day > a.day) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
+  const DayZA = (a, b) => {
+    if (a.day > b.day) {
+      return 1;
+    } else if (b.day > a.day) {
+      return -1;
+    } else {
+      return 0;
+    }
   };
   const handleSelect = (e) => {
     const container = e.target.nextSibling;
@@ -172,7 +225,7 @@ function App() {
         trigger={trigger}
         setTrigger={setTrigger}
         taskList={taskList}
-        setTaskList={setTasklist}
+        setTaskList={setTaskList}
       />
       <footer>
         <div className="footer-container">
