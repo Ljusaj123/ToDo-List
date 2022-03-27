@@ -11,7 +11,8 @@
   background-color: $medium-pink;
   @include universal-flex-display(space-between, center);
 
-  & .filter-by-day-container {
+  & .filter-by-day-container,
+  & .sort-container {
     position: relative;
     max-height: fit-content;
     width: 15%;
@@ -33,7 +34,8 @@
         pointer-events: none;
       }
     }
-    & .days-options-container {
+    & .days-options-container,
+    & .sort-options-container {
       position: absolute;
       top: 105%;
       right: 0%;
