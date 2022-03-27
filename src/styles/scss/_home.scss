@@ -15,7 +15,7 @@
   & .sort-container {
     position: relative;
     max-height: fit-content;
-    width: 15%;
+    width: clamp(155px, 40%, 300px);
     background-color: transparent;
     @include universal-flex-display(space-between, center);
     flex-direction: column;
@@ -42,6 +42,7 @@
       background-color: $medium-pink;
       max-height: 0;
       width: 100%;
+      border: 1px solid black;
       padding: 1rem;
       margin-left: 0.5rem;
       opacity: 0;
@@ -178,6 +179,19 @@
       & .task-info {
         & p {
           padding: 0;
+        }
+      }
+    }
+  }
+
+  .filter-sort-container {
+    padding: 0 0.5rem;
+    & .filter-by-day-container,
+    & .sort-container {
+      & .days-options-container,
+      & .sort-options-container {
+        & .day-option {
+          padding: 1rem;
         }
       }
     }
