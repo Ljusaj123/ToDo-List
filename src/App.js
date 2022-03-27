@@ -4,6 +4,7 @@ import { BsGithub, BsInstagram, BsHeartFill } from "react-icons/bs";
 import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 import PopupWindow from "./components/PopupWindow";
 import days from "./const/Days";
+import sortingList from "./const/SortingList";
 
 function App() {
   const localTodos = localStorage.getItem("tasks");
@@ -12,7 +13,10 @@ function App() {
     localTodos ? JSON.parse(localTodos) : []
   );
   const [singleTask, setSingleTask] = useState("");
-  const [selectValue, setSelectValue] = useState("Select Day");
+  const [selectValue, setSelectValue] = useState({
+    days: "Select day",
+    sort: "Select Sort",
+  });
   const [showDaysOptions, setShowDaysOptions] = useState(true);
 
   const handleDelete = () => {
@@ -29,9 +33,12 @@ function App() {
   };
 
   const handleOption = (e) => {
-    const name = e.target.children[1].innerHTML;
-    console.log(name);
-    setSelectValue(name);
+    const name = e.target.children[0].name;
+    const value = e.target.children[1].innerHTML;
+    setSelectValue({
+      ...selectValue,
+      [name]: value,
+    });
     const container = e.target.parentElement;
     container.classList.remove("active");
   };
@@ -58,7 +65,7 @@ function App() {
       <div className="filter-sort-container">
         <div className="filter-by-day-container">
           <div className="selected" onClick={handleSelect}>
-            <p>{selectValue}</p>
+            <p>{selectValue.days}</p>
             <p>{showDaysOptions ? <BiDownArrow /> : <BiUpArrow />}</p>
           </div>
           <div className="days-options-container">
@@ -72,7 +79,22 @@ function App() {
             })}
           </div>
         </div>
-        <div className="sort-container"></div>
+        <div className="sort-container">
+          <div className="selected" onClick={handleSelect}>
+            <p>{selectValue.sort}</p>
+            <p>{showDaysOptions ? <BiDownArrow /> : <BiUpArrow />}</p>
+          </div>
+          <div className="sort-options-container">
+            {sortingList.map((sort, index) => {
+              return (
+                <div className="day-option" onClick={handleOption} key={index}>
+                  <input type="radio" className="radio" id={sort} name="sort" />
+                  <label>{sort}</label>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
       <main className="tasks-containers">
         <div className="task-name-container">
