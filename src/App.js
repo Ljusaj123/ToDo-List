@@ -5,22 +5,27 @@ import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 import PopupWindow from "./components/PopupWindow";
 import days from "./const/Days";
 import sortingList from "./const/SortingList";
+import NameAZ from "./utilities/NameAZ";
+import NameZA from "./utilities/NameZA";
+import DayZA from "./utilities/DayZA";
+import DayAZ from "./utilities/DayAZ";
 
 function App() {
-  const localTodos = localStorage.getItem("tasks");
   const [trigger, setTrigger] = useState(false);
   const [taskListInit, setTaskListInit] = useState(
-    localTodos ? JSON.parse(localTodos) : []
+    localStorage.getItem("tasks")
+      ? JSON.parse(localStorage.getItem("tasks"))
+      : []
   );
   const [taskList, setTaskList] = useState(taskListInit);
 
   const [singleTask, setSingleTask] = useState("");
   const [selectValue, setSelectValue] = useState({
-    days: "Select day",
-    sort: "Select Sort",
+    days: "Select Day",
+    sort: "Sort by:",
   });
-  const [showDaysOptions, setShowDaysOptions] = useState(false);
-  const [showSortOptions, setShowSortOptions] = useState(false);
+  const [showArrowDaysOptions, setShowArrowDaysOptions] = useState(false);
+  const [showArrowSortOptions, setShowArrowSortOptions] = useState(false);
 
   const handleDelete = () => {
     const newList = taskListInit.filter((task) => {
@@ -42,12 +47,15 @@ function App() {
       ...selectValue,
       [name]: value,
     });
+    const container = e.target.parentElement;
+    container.classList.remove("active");
+
     switch (name) {
       case "days":
-        setShowDaysOptions(false);
+        setShowArrowDaysOptions(false);
         break;
       case "sort":
-        setShowSortOptions(false);
+        setShowArrowSortOptions(false);
         break;
       default:
         break;
@@ -70,80 +78,27 @@ function App() {
     }
     switch (selectValue.days) {
       case "Today":
-        const today = taskListInit.filter((task) => task.day === "Today");
-        setTaskList(today);
+        setTaskList(taskListInit.filter((task) => task.day === "Today"));
         break;
       case "Tommorow":
-        const tom = taskListInit.filter((task) => task.day === "Tommorow");
-        setTaskList(tom);
+        setTaskList(taskListInit.filter((task) => task.day === "Tommorow"));
         break;
       case "Next Week":
-        const next = taskListInit.filter((task) => task.day === "Next Week");
-        setTaskList(next);
+        setTaskList(taskListInit.filter((task) => task.day === "Next Week"));
         break;
       case "Never":
-        const never = taskListInit.filter((task) => task.day === "Never");
-        setTaskList(never);
+        setTaskList(taskListInit.filter((task) => task.day === "Never"));
         break;
       default:
         break;
     }
-
-    const container = e.target.parentElement;
-    container.classList.remove("active");
   };
 
-  const NameZA = (a, b) => {
-    if (a.name > b.name) {
-      return -1;
-    } else if (b.name > a.name) {
-      return 1;
-    } else {
-      return 0;
-    }
-  };
-  const NameAZ = (a, b) => {
-    if (a.name > b.name) {
-      return 1;
-    } else if (b.name > a.name) {
-      return -1;
-    } else {
-      return 0;
-    }
-  };
-  const DayAZ = (a, b) => {
-    if (a.day > b.day) {
-      return 1;
-    } else if (b.day > a.day) {
-      return -1;
-    } else {
-      return 0;
-    }
-  };
-  const DayZA = (a, b) => {
-    if (a.day.toLowerCase() > b.day.toLowerCase()) {
-      return -1;
-    } else if (b.day.toLowerCase() > a.day.toLowerCase()) {
-      return 1;
-    } else {
-      return 0;
-    }
-  };
   const handleSelect = (e) => {
     const container = e.target.nextSibling;
-    switch (container.id) {
-      case "days":
-        setShowDaysOptions((prev) => !prev);
-        break;
-      case "sort":
-        setShowSortOptions((prev) => !prev);
-        break;
-      default:
-        break;
-    }
     container.classList.toggle("active");
-    setShowDaysOptions((prev) => !prev);
-    setShowSortOptions((prev) => !prev);
+    setShowArrowDaysOptions((prev) => !prev);
+    setShowArrowSortOptions((prev) => !prev);
   };
 
   useEffect(() => {
@@ -165,7 +120,7 @@ function App() {
         <div className="filter-by-day-container">
           <div className="selected" onClick={handleSelect}>
             <p>{selectValue.days}</p>
-            <p>{showDaysOptions ? <BiUpArrow /> : <BiDownArrow />}</p>
+            <p>{showArrowDaysOptions ? <BiUpArrow /> : <BiDownArrow />}</p>
           </div>
           <div className="days-options-container">
             {days.map((day, index) => {
@@ -181,7 +136,7 @@ function App() {
         <div className="sort-container">
           <div className="selected" onClick={handleSelect}>
             <p>{selectValue.sort}</p>
-            <p>{showSortOptions ? <BiUpArrow /> : <BiDownArrow />}</p>
+            <p>{showArrowSortOptions ? <BiUpArrow /> : <BiDownArrow />}</p>
           </div>
           <div className="sort-options-container">
             {sortingList.map((sort, index) => {
