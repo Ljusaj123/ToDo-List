@@ -9,9 +9,11 @@ import sortingList from "./const/SortingList";
 function App() {
   const localTodos = localStorage.getItem("tasks");
   const [trigger, setTrigger] = useState(false);
-  const [taskList, setTaskList] = useState(
+  const [taskListInit, setTaskListInit] = useState(
     localTodos ? JSON.parse(localTodos) : []
   );
+  const [taskList, setTaskList] = useState(taskListInit);
+
   const [singleTask, setSingleTask] = useState("");
   const [selectValue, setSelectValue] = useState({
     days: "Select day",
@@ -21,10 +23,10 @@ function App() {
   const [showSortOptions, setShowSortOptions] = useState(false);
 
   const handleDelete = () => {
-    const newList = taskList.filter((task) => {
+    const newList = taskListInit.filter((task) => {
       return task !== singleTask;
     });
-    setTaskList(newList);
+    setTaskListInit(newList);
     setSingleTask("");
   };
 
@@ -66,6 +68,26 @@ function App() {
       default:
         break;
     }
+    switch (selectValue.days) {
+      case "Today":
+        const today = taskListInit.filter((task) => task.day === "Today");
+        setTaskList(today);
+        break;
+      case "Tommorow":
+        const tom = taskListInit.filter((task) => task.day === "Tommorow");
+        setTaskList(tom);
+        break;
+      case "Next Week":
+        const next = taskListInit.filter((task) => task.day === "Next Week");
+        setTaskList(next);
+        break;
+      case "Never":
+        const never = taskListInit.filter((task) => task.day === "Never");
+        setTaskList(never);
+        break;
+      default:
+        break;
+    }
 
     const container = e.target.parentElement;
     container.classList.remove("active");
@@ -73,36 +95,36 @@ function App() {
 
   const NameZA = (a, b) => {
     if (a.name > b.name) {
-      return 1;
-    } else if (b.name > a.name) {
       return -1;
+    } else if (b.name > a.name) {
+      return 1;
     } else {
       return 0;
     }
   };
   const NameAZ = (a, b) => {
     if (a.name > b.name) {
-      return -1;
-    } else if (b.name > a.name) {
       return 1;
+    } else if (b.name > a.name) {
+      return -1;
     } else {
       return 0;
     }
   };
   const DayAZ = (a, b) => {
     if (a.day > b.day) {
-      return -1;
-    } else if (b.day > a.day) {
       return 1;
+    } else if (b.day > a.day) {
+      return -1;
     } else {
       return 0;
     }
   };
   const DayZA = (a, b) => {
-    if (a.day > b.day) {
-      return 1;
-    } else if (b.day > a.day) {
+    if (a.day.toLowerCase() > b.day.toLowerCase()) {
       return -1;
+    } else if (b.day.toLowerCase() > a.day.toLowerCase()) {
+      return 1;
     } else {
       return 0;
     }
@@ -125,8 +147,9 @@ function App() {
   };
 
   useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(taskList));
-  }, [taskList]);
+    localStorage.setItem("tasks", JSON.stringify(taskListInit));
+    setTaskList(taskListInit);
+  }, [taskListInit]);
 
   return (
     <div className="todo">
@@ -224,8 +247,8 @@ function App() {
       <PopupWindow
         trigger={trigger}
         setTrigger={setTrigger}
-        taskList={taskList}
-        setTaskList={setTaskList}
+        taskList={taskListInit}
+        setTaskList={setTaskListInit}
       />
       <footer>
         <div className="footer-container">
