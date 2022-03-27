@@ -60,22 +60,16 @@ function App() {
       default:
         break;
     }
-    switch (selectValue.sort) {
-      case "Name (A-Z)":
-        setTaskList(taskList.sort(NameAZ));
-        break;
-      case "Name (Z-A)":
-        setTaskList(taskList.sort(NameZA));
-        break;
-      case "Day (A-Z)":
-        setTaskList(taskList.sort(DayAZ));
-        break;
-      case "Day (Z-A)":
-        setTaskList(taskList.sort(DayZA));
-        break;
-      default:
-        break;
-    }
+  };
+
+  const handleSelect = (e) => {
+    const container = e.target.nextSibling;
+    container.classList.toggle("active");
+    setShowArrowDaysOptions((prev) => !prev);
+    setShowArrowSortOptions((prev) => !prev);
+  };
+
+  useEffect(() => {
     switch (selectValue.days) {
       case "Today":
         setTaskList(taskListInit.filter((task) => task.day === "Today"));
@@ -92,14 +86,26 @@ function App() {
       default:
         break;
     }
-  };
+  }, [selectValue.days, taskListInit]);
 
-  const handleSelect = (e) => {
-    const container = e.target.nextSibling;
-    container.classList.toggle("active");
-    setShowArrowDaysOptions((prev) => !prev);
-    setShowArrowSortOptions((prev) => !prev);
-  };
+  useEffect(() => {
+    switch (selectValue.sort) {
+      case "Name (A-Z)":
+        setTaskList(taskListInit.sort(NameAZ));
+        break;
+      case "Name (Z-A)":
+        setTaskList(taskListInit.sort(NameZA));
+        break;
+      case "Day (A-Z)":
+        setTaskList(taskListInit.sort(DayAZ));
+        break;
+      case "Day (Z-A)":
+        setTaskList(taskListInit.sort(DayZA));
+        break;
+      default:
+        break;
+    }
+  }, [selectValue.sort, taskListInit]);
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(taskListInit));
@@ -108,6 +114,7 @@ function App() {
 
   return (
     <div className="todo">
+      {console.log(selectValue.sort)}
       <header className="title-container">
         <h1>Simple ToDo App</h1>
       </header>
