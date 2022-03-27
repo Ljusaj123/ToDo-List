@@ -17,7 +17,8 @@ function App() {
     days: "Select day",
     sort: "Select Sort",
   });
-  const [showDaysOptions, setShowDaysOptions] = useState(true);
+  const [showDaysOptions, setShowDaysOptions] = useState(false);
+  const [showSortOptions, setShowSortOptions] = useState(false);
 
   const handleDelete = () => {
     const newList = taskList.filter((task) => {
@@ -39,13 +40,35 @@ function App() {
       ...selectValue,
       [name]: value,
     });
+    switch (name) {
+      case "days":
+        setShowDaysOptions(false);
+        break;
+      case "sort":
+        setShowSortOptions(false);
+        break;
+      default:
+        break;
+    }
+
     const container = e.target.parentElement;
     container.classList.remove("active");
   };
   const handleSelect = (e) => {
     const container = e.target.nextSibling;
+    switch (container.id) {
+      case "days":
+        setShowDaysOptions((prev) => !prev);
+        break;
+      case "sort":
+        setShowSortOptions((prev) => !prev);
+        break;
+      default:
+        break;
+    }
     container.classList.toggle("active");
     setShowDaysOptions((prev) => !prev);
+    setShowSortOptions((prev) => !prev);
   };
 
   useEffect(() => {
@@ -66,7 +89,7 @@ function App() {
         <div className="filter-by-day-container">
           <div className="selected" onClick={handleSelect}>
             <p>{selectValue.days}</p>
-            <p>{showDaysOptions ? <BiDownArrow /> : <BiUpArrow />}</p>
+            <p>{showDaysOptions ? <BiUpArrow /> : <BiDownArrow />}</p>
           </div>
           <div className="days-options-container">
             {days.map((day, index) => {
@@ -82,7 +105,7 @@ function App() {
         <div className="sort-container">
           <div className="selected" onClick={handleSelect}>
             <p>{selectValue.sort}</p>
-            <p>{showDaysOptions ? <BiDownArrow /> : <BiUpArrow />}</p>
+            <p>{showSortOptions ? <BiUpArrow /> : <BiDownArrow />}</p>
           </div>
           <div className="sort-options-container">
             {sortingList.map((sort, index) => {
