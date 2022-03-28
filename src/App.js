@@ -65,7 +65,6 @@ function App() {
   const handleSelect = (e) => {
     const container = e.target.nextSibling;
     container.classList.toggle("active");
-    console.log(container.id);
     switch (container.id) {
       case "days":
         setShowArrowDaysOptions((prev) => !prev);

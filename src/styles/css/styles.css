@@ -33,20 +33,6 @@ a {
   text-decoration: none;
 }
 
-header {
-  width: 100%;
-  padding: 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
 button {
   padding: 1rem;
   border: none;
@@ -70,7 +56,7 @@ button:active {
 .create-btn {
   border-radius: 10px;
   background-color: rgba(155, 106, 97, 0.897);
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-size: clamp(1rem, 2vw, 1.3rem);
 }
 
 .popup-btn {
@@ -87,6 +73,28 @@ button:active {
 
 .no-task-btn {
   cursor: not-allowed;
+  border-radius: 10px;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+}
+
+.delete-btn {
+  background: #1d0101;
+  border-radius: 15px;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+header {
+  width: 100%;
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .title-container {
@@ -237,14 +245,151 @@ button:active {
 
 .filter-sort-container {
   width: 100%;
-  height: 10vh;
-  background-color: black;
+  height: 15vh;
+  padding: 1rem 2rem;
+  background-color: #442525;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.filter-sort-container .filter-by-day-container,
+.filter-sort-container .sort-container {
+  position: relative;
+  max-height: -webkit-fit-content;
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+  width: clamp(155px, 40%, 300px);
+  background-color: transparent;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.filter-sort-container .filter-by-day-container .selected,
+.filter-sort-container .sort-container .selected {
+  width: 100%;
+  color: rgba(155, 106, 97, 0.897);
+  border-radius: 10px;
+  border: 1px solid rgba(155, 106, 97, 0.897);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.filter-sort-container .filter-by-day-container .selected p,
+.filter-sort-container .sort-container .selected p {
+  margin: 0;
+  pointer-events: none;
+}
+
+.filter-sort-container .filter-by-day-container .days-options-container,
+.filter-sort-container .filter-by-day-container .sort-options-container,
+.filter-sort-container .sort-container .days-options-container,
+.filter-sort-container .sort-container .sort-options-container {
+  position: absolute;
+  top: 105%;
+  right: 0%;
+  background-color: #442525;
+  max-height: 0;
+  width: 100%;
+  border: 1px solid black;
+  padding: 1rem;
+  margin-left: 0.5rem;
+  opacity: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.filter-sort-container .filter-by-day-container .days-options-container .day-option,
+.filter-sort-container .filter-by-day-container .sort-options-container .day-option,
+.filter-sort-container .sort-container .days-options-container .day-option,
+.filter-sort-container .sort-container .sort-options-container .day-option {
+  padding: 1rem 2rem;
+  color: rgba(212, 202, 202, 0.863);
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.filter-sort-container .filter-by-day-container .days-options-container .day-option:hover,
+.filter-sort-container .filter-by-day-container .sort-options-container .day-option:hover,
+.filter-sort-container .sort-container .days-options-container .day-option:hover,
+.filter-sort-container .sort-container .sort-options-container .day-option:hover {
+  background: rgba(155, 106, 97, 0.897);
+}
+
+.filter-sort-container .filter-by-day-container .days-options-container .day-option input,
+.filter-sort-container .filter-by-day-container .sort-options-container .day-option input,
+.filter-sort-container .sort-container .days-options-container .day-option input,
+.filter-sort-container .sort-container .sort-options-container .day-option input {
+  display: none;
+}
+
+.filter-sort-container .filter-by-day-container .days-options-container .day-option label,
+.filter-sort-container .filter-by-day-container .sort-options-container .day-option label,
+.filter-sort-container .sort-container .days-options-container .day-option label,
+.filter-sort-container .sort-container .sort-options-container .day-option label {
+  pointer-events: none;
+}
+
+.filter-sort-container .filter-by-day-container .days-options-container.active,
+.filter-sort-container .filter-by-day-container .sort-options-container.active,
+.filter-sort-container .sort-container .days-options-container.active,
+.filter-sort-container .sort-container .sort-options-container.active {
+  max-height: 20vh;
+  opacity: 1;
+  overflow-y: scroll;
+  z-index: 100;
+}
+
+.filter-sort-container .filter-by-day-container .days-options-container::-webkit-scrollbar,
+.filter-sort-container .filter-by-day-container .sort-options-container::-webkit-scrollbar,
+.filter-sort-container .sort-container .days-options-container::-webkit-scrollbar,
+.filter-sort-container .sort-container .sort-options-container::-webkit-scrollbar {
+  width: 0.5rem;
+  background: rgba(155, 106, 97, 0.897);
+  border-radius: 0 1rem 1rem 0;
+}
+
+.filter-sort-container .filter-by-day-container .days-options-container::-webkit-scrollbar-thumb,
+.filter-sort-container .filter-by-day-container .sort-options-container::-webkit-scrollbar-thumb,
+.filter-sort-container .sort-container .days-options-container::-webkit-scrollbar-thumb,
+.filter-sort-container .sort-container .sort-options-container::-webkit-scrollbar-thumb {
+  background-color: rgba(212, 202, 202, 0.863);
+  border-radius: 0 1rem 1rem 0;
 }
 
 .tasks-containers {
   width: 100%;
   height: 100vh;
-  padding: 2rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -258,16 +403,30 @@ button:active {
 
 .tasks-containers .task-name-container,
 .tasks-containers .task-info-container {
-  height: 90%;
-  width: 40%;
+  height: 80%;
+  width: clamp(310px, 90%, 550px);
   background-color: #442525;
   margin: 1rem;
   border-radius: 10px;
+  overflow-y: scroll;
+}
+
+.tasks-containers .task-name-container::-webkit-scrollbar,
+.tasks-containers .task-info-container::-webkit-scrollbar {
+  width: 0.5rem;
+  background: rgba(155, 106, 97, 0.897);
+  border-radius: 0 1rem 1rem 0;
+}
+
+.tasks-containers .task-name-container::-webkit-scrollbar-thumb,
+.tasks-containers .task-info-container::-webkit-scrollbar-thumb {
+  background-color: rgba(212, 202, 202, 0.863);
+  border-radius: 0 1rem 1rem 0;
 }
 
 .tasks-containers .task-container {
   width: 100%;
-  padding: 1rem 2rem;
+  padding: 1.5rem;
   margin: 0.5rem 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -289,8 +448,86 @@ button:active {
 }
 
 .tasks-containers .task-container p {
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  width: 50%;
+  margin: 0;
+}
+
+.tasks-containers .task-container .day {
+  text-align: right;
+}
+
+.tasks-containers .task-container input {
+  cursor: pointer;
+  margin-right: 2rem;
+}
+
+.tasks-containers .crossed {
+  opacity: 0.4;
+}
+
+.tasks-containers .task-info-container .task-info {
+  width: 100%;
+  max-height: 80%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 1rem;
+}
+
+.tasks-containers .task-info-container .task-info h2 {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+}
+
+.tasks-containers .task-info-container .task-info p {
   text-align: center;
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+}
+
+.tasks-containers .task-info-container .buttons-container {
+  width: 100%;
+  bottom: 2%;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 1rem 0;
+}
+
+@media screen and (max-width: 750px) {
+  .tasks-containers {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .tasks-containers .task-info-container {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  .tasks-containers .task-info-container .task-info p {
+    padding: 0;
+  }
+  .filter-sort-container {
+    padding: 0 0.5rem;
+  }
+  .filter-sort-container .filter-by-day-container .days-options-container .day-option,
+  .filter-sort-container .filter-by-day-container .sort-options-container .day-option,
+  .filter-sort-container .sort-container .days-options-container .day-option,
+  .filter-sort-container .sort-container .sort-options-container .day-option {
+    padding: 1rem;
+  }
 }
 
 footer {
