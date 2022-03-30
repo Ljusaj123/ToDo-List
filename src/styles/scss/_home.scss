@@ -174,8 +174,11 @@
     height: fit-content;
     flex-direction: column;
 
-    & .task-info-container {
+    & .task-info-container,
+    & .task-name-container {
+      min-height: 30vh;
       height: fit-content;
+      margin: 2rem 0;
       & .task-info {
         & p {
           padding: 0;
