@@ -175,25 +175,29 @@ function App() {
           <header>
             <h1>Task Name</h1>
           </header>
-          {taskList.map((task, index) => {
-            return (
-              <div
-                className={
-                  task.completed ? "task-container crossed" : "task-container"
-                }
-                key={index}
-                onClick={() => setSingleTask(task)}
-              >
-                <input
-                  type="checkbox"
-                  onChange={() => toggleComplete(task.id)}
-                  checked={task.completed}
-                />
-                <p>{task.name}</p>
-                <p className="day">{task.day}</p>
-              </div>
-            );
-          })}
+          {taskListInit.length !== 0 ? (
+            taskList.map((task, index) => {
+              return (
+                <div
+                  className={
+                    task.completed ? "task-container crossed" : "task-container"
+                  }
+                  key={index}
+                  onClick={() => setSingleTask(task)}
+                >
+                  <input
+                    type="checkbox"
+                    onChange={() => toggleComplete(task.id)}
+                    checked={task.completed}
+                  />
+                  <p>{task.name}</p>
+                  <p className="day">{task.day}</p>
+                </div>
+              );
+            })
+          ) : (
+            <p className="info-message">There are no tasks, make one!</p>
+          )}
         </div>
         <div className="task-info-container">
           <header>
@@ -212,7 +216,7 @@ function App() {
               <p>{singleTask.list ? singleTask.list : "No list"}</p>
             </div>
           ) : (
-            ""
+            <p className="info-message">Click on task for more info</p>
           )}
           {singleTask ? (
             <div className="buttons-container">

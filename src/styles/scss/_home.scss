@@ -110,6 +110,11 @@
       background-color: $light-white-pink;
       border-radius: 0 1rem 1rem 0;
     }
+
+    & .info-message {
+      text-align: center;
+      font-size: clamp(1rem, 2vw, 1.4rem);
+    }
   }
 
   .task-container {
