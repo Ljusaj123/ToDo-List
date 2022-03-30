@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import DaysPopupWindow from "./DaysPopupWindow";
 import ListPopupWindow from "./ListPopupWindow";
 
 function PopupWindow({ trigger, setTrigger, taskList, setTaskList }) {
-  const initialTask = { name: "", notes: "", day: "", list: "" };
+  const initialTask = {
+    id: "",
+    name: "",
+    notes: "",
+    day: "",
+    list: "",
+    completed: false,
+  };
 
   const [listTrigger, setListTrigger] = useState(false);
   const [dayTrigger, setDayTrigger] = useState(false);
@@ -20,6 +27,11 @@ function PopupWindow({ trigger, setTrigger, taskList, setTaskList }) {
     setTask(initialTask);
     setTrigger(false);
   };
+
+  useEffect(() => {
+    const random = Math.floor(Math.random() * 10000);
+    setTask({ ...task, id: random.toString() });
+  }, [dayTrigger]);
 
   return (
     <>

@@ -35,9 +35,15 @@ function App() {
     setSingleTask("");
   };
 
-  const handleDone = (e) => {
-    const div = e.target.parentElement;
-    div.classList.toggle("crossed");
+  const toggleComplete = (id) => {
+    const newTodos = [...taskListInit].map((task) => {
+      if (task.id === id) {
+        task.completed = !task.completed;
+      }
+      return task;
+    });
+
+    setTaskListInit(newTodos);
   };
 
   const handleOption = (e) => {
@@ -172,11 +178,17 @@ function App() {
           {taskList.map((task, index) => {
             return (
               <div
-                className="task-container"
+                className={
+                  task.completed ? "task-container crossed" : "task-container"
+                }
                 key={index}
                 onClick={() => setSingleTask(task)}
               >
-                <input type="checkbox" onClick={handleDone} />
+                <input
+                  type="checkbox"
+                  onChange={() => toggleComplete(task.id)}
+                  checked={task.completed}
+                />
                 <p>{task.name}</p>
                 <p className="day">{task.day}</p>
               </div>
