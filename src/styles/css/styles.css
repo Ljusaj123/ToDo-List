@@ -424,6 +424,12 @@ header {
   border-radius: 0 1rem 1rem 0;
 }
 
+.tasks-containers .task-name-container .info-message,
+.tasks-containers .task-info-container .info-message {
+  text-align: center;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+}
+
 .tasks-containers .task-container {
   width: 100%;
   padding: 1.5rem;
@@ -511,12 +517,16 @@ header {
         -ms-flex-direction: column;
             flex-direction: column;
   }
-  .tasks-containers .task-info-container {
+  .tasks-containers .task-info-container,
+  .tasks-containers .task-name-container {
+    min-height: 30vh;
     height: -webkit-fit-content;
     height: -moz-fit-content;
     height: fit-content;
+    margin: 2rem 0;
   }
-  .tasks-containers .task-info-container .task-info p {
+  .tasks-containers .task-info-container .task-info p,
+  .tasks-containers .task-name-container .task-info p {
     padding: 0;
   }
   .filter-sort-container {
