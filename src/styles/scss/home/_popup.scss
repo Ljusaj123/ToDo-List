@@ -15,18 +15,13 @@
     border-radius: 15px;
     position: relative;
 
-    & .popup-title-container {
-      padding: 1rem 0;
-      font-size: clamp(1rem, 2.5vw, 1.5rem);
-    }
-
     .close-popup-container {
       position: absolute;
       top: 2%;
       right: 2%;
 
       & svg {
-        font-size: 2rem;
+        font-size: clamp(1.5rem, 3vw, 2rem);
         cursor: pointer;
         color: $light-white-pink;
       }
@@ -72,10 +67,9 @@
     }
 
     .day-list {
-      & .day-container,
-      & .list-container {
+      & .button-container {
         width: 50%;
-        @include universal-flex-display(space-evenly, center);
+        @include universal-flex-display(center, center);
         flex-direction: column;
 
         & p {
@@ -84,10 +78,6 @@
           text-align: center;
         }
       }
-    }
-
-    & .new-task {
-      padding: 0rem;
     }
 
     & .lists-container {

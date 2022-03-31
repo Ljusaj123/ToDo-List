@@ -1,0 +1,12 @@
+header {
+  width: 100%;
+  padding: 1.5rem 0;
+  @include universal-flex-display(center, center);
+  flex-direction: column;
+
+  & .create-button-container {
+    width: 100%;
+    @include universal-flex-display(center, center);
+    padding: 2rem 0;
+  }
+}

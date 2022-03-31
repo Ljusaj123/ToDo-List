@@ -13,7 +13,7 @@ function DaysPopupWindow({ trigger, setTrigger, setTask, task }) {
         <div className="popup">
           <div className="popup-container">
             <header>
-              <h1>Select day:</h1>
+              <h2>Select day:</h2>
             </header>
             <div
               className="close-popup-container"

@@ -4,6 +4,8 @@
 @import "setup";
 @import "buttons";
 @import "header";
-@import "popup";
-@import "home";
+@import "home/popup";
 @import "footer";
+@import "home/filter-sort-section";
+@import "responsive";
+@import "home/tasks-section";

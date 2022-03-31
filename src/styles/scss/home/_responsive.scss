@@ -1,0 +1,24 @@
+@include media-750 {
+  .tasks-containers {
+    height: fit-content;
+    flex-direction: column;
+
+    & .task-info-container,
+    & .task-name-container {
+      min-height: 30vh;
+      height: fit-content;
+      margin: 2rem 0;
+    }
+  }
+
+  .filter-sort-container {
+    padding: 0 0.5rem;
+    & .container {
+      & .options-container {
+        & .option {
+          padding: 1rem;
+        }
+      }
+    }
+  }
+}

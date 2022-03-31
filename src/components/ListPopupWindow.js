@@ -13,7 +13,7 @@ function ListPopupWindow({ trigger, setTrigger, setTask, task }) {
         <div className="popup">
           <div className="popup-container">
             <header>
-              <h1>Select List:</h1>
+              <h2>Select List:</h2>
             </header>
             <div
               className="close-popup-container"

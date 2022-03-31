@@ -130,22 +130,23 @@ function App() {
     <div className="todo">
       <header className="title-container">
         <h1>Simple ToDo App</h1>
+        <div className="create-button-container">
+          <button className="create-btn" onClick={() => setTrigger(true)}>
+            Create New Task
+          </button>
+        </div>
       </header>
-      <div className="create-button-container">
-        <button className="create-btn" onClick={() => setTrigger(true)}>
-          Create New Task
-        </button>
-      </div>
+
       <div className="filter-sort-container">
-        <div className="filter-by-day-container">
+        <div className="container filter-by-day">
           <div className="selected" onClick={handleSelect}>
             <p>{selectValue.days}</p>
             <p>{showArrowDaysOptions ? <BiUpArrow /> : <BiDownArrow />}</p>
           </div>
-          <div className="days-options-container" id="days">
+          <div className="options-container" id="days">
             {days.map((day, index) => {
               return (
-                <div className="day-option" onClick={handleOption} key={index}>
+                <div className="option" onClick={handleOption} key={index}>
                   <input type="radio" className="radio" id={day} name="days" />
                   <label>{day}</label>
                 </div>
@@ -153,15 +154,15 @@ function App() {
             })}
           </div>
         </div>
-        <div className="sort-container">
+        <div className="container sort">
           <div className="selected" onClick={handleSelect}>
             <p>{selectValue.sort}</p>
             <p>{showArrowSortOptions ? <BiUpArrow /> : <BiDownArrow />}</p>
           </div>
-          <div className="sort-options-container" id="sort">
+          <div className="options-container" id="sort">
             {sortingList.map((sort, index) => {
               return (
-                <div className="day-option" onClick={handleOption} key={index}>
+                <div className="option" onClick={handleOption} key={index}>
                   <input type="radio" className="radio" id={sort} name="sort" />
                   <label>{sort}</label>
                 </div>
@@ -171,17 +172,15 @@ function App() {
         </div>
       </div>
       <main className="tasks-containers">
-        <div className="task-name-container">
+        <div className="task-container" id="task-name">
           <header>
-            <h1>Task Name</h1>
+            <h2>Task Name</h2>
           </header>
           {taskListInit.length !== 0 ? (
             taskList.map((task, index) => {
               return (
                 <div
-                  className={
-                    task.completed ? "task-container crossed" : "task-container"
-                  }
+                  className={task.completed ? "task crossed" : "task"}
                   key={index}
                   onClick={() => setSingleTask(task)}
                 >
@@ -199,27 +198,27 @@ function App() {
             <p className="info-message">There are no tasks, make one!</p>
           )}
         </div>
-        <div className="task-info-container">
+        <div className="task-container" id="task-info">
           <header>
-            <h1>Task Info</h1>
+            <h2>Task Info</h2>
           </header>
 
           {singleTask ? (
             <div className="task-info">
-              <h2>Task name:</h2>
+              <h3>Task name:</h3>
               <p>{singleTask.name}</p>
-              <h2>Notes:</h2>
+              <h3>Notes:</h3>
               <p>{singleTask.notes ? singleTask.notes : "No notes"}</p>
-              <h2>Day:</h2>
+              <h3>Day:</h3>
               <p>{singleTask.day}</p>
-              <h2>List:</h2>
+              <h3>List:</h3>
               <p>{singleTask.list ? singleTask.list : "No list"}</p>
             </div>
           ) : (
             <p className="info-message">Click on task for more info</p>
           )}
           {singleTask ? (
-            <div className="buttons-container">
+            <div className="button-container">
               <button className="delete-btn" onClick={handleDelete}>
                 Delete
               </button>

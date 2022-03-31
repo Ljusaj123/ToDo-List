@@ -38,8 +38,8 @@ function PopupWindow({ trigger, setTrigger, taskList, setTaskList }) {
       {trigger ? (
         <div className="popup">
           <div className="popup-container">
-            <header className="popup-title-container">
-              <h1>New Task</h1>
+            <header>
+              <h2>New Task</h2>
             </header>
             <div
               className="close-popup-container"
@@ -62,8 +62,8 @@ function PopupWindow({ trigger, setTrigger, taskList, setTaskList }) {
                 onChange={handleChange}
               ></textarea>
             </div>
-            <div className="day-list container">
-              <div className="day-container">
+            <div className="container day-list">
+              <div className="button-container day">
                 <button
                   className="select-btn"
                   onClick={() => setDayTrigger(true)}
@@ -78,7 +78,7 @@ function PopupWindow({ trigger, setTrigger, taskList, setTaskList }) {
                   setTask={setTask}
                 />
               </div>
-              <div className="list-container">
+              <div className="button-container day">
                 <button
                   className="select-btn"
                   onClick={() => setListTrigger(true)}
@@ -95,7 +95,7 @@ function PopupWindow({ trigger, setTrigger, taskList, setTaskList }) {
               </div>
             </div>
 
-            <div className="new-task container">
+            <div className="container new-task">
               <button
                 type="submit"
                 className={task.name && task.day ? "create-btn" : "no-task-btn"}

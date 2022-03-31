@@ -1,0 +1,74 @@
+.tasks-containers {
+  width: 100%;
+  height: 100vh;
+  @include universal-flex-display(center, center);
+
+  & .task-container {
+    height: 80%;
+    width: clamp(310px, 90%, 550px);
+    background-color: $medium-pink;
+    margin: 1rem;
+    border-radius: 10px;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+      background: $light-pink;
+      border-radius: 0 1rem 1rem 0;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $light-white-pink;
+      border-radius: 0 1rem 1rem 0;
+    }
+
+    & .info-message {
+      text-align: center;
+      font-size: clamp(1rem, 2vw, 1.4rem);
+    }
+
+    & .task {
+      width: 100%;
+      padding: 1.5rem;
+      margin: 0.5rem 0;
+      @include universal-flex-display(space-between, center);
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.5s ease;
+
+      &:hover {
+        background-color: $light-pink;
+      }
+      & p {
+        width: 50%;
+        margin-bottom: 0;
+      }
+
+      & .day {
+        text-align: right;
+      }
+      & input {
+        cursor: pointer;
+        margin-right: 2rem;
+      }
+    }
+    & .task-info {
+      width: 100%;
+      max-height: 80%;
+      flex-direction: column;
+      padding: 1rem;
+
+      & p {
+        text-align: center;
+      }
+    }
+    & .button-container {
+      width: 100%;
+      @include universal-flex-display(center, center);
+      margin: 2rem 0;
+    }
+  }
+
+  .crossed {
+    opacity: 0.4;
+  }
+}
