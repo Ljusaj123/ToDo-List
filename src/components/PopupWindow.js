@@ -16,6 +16,7 @@ function PopupWindow({ trigger, setTrigger, taskList, setTaskList }) {
   const [listTrigger, setListTrigger] = useState(false);
   const [dayTrigger, setDayTrigger] = useState(false);
   const [task, setTask] = useState(initialTask);
+  const [error, setError] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,9 +24,14 @@ function PopupWindow({ trigger, setTrigger, taskList, setTaskList }) {
   };
 
   const handleSubmit = () => {
-    setTaskList([...taskList, task]);
-    setTask(initialTask);
-    setTrigger(false);
+    if (task.name && task.day) {
+      setTaskList([...taskList, task]);
+      setTask(initialTask);
+      setTrigger(false);
+      setError(false);
+    } else {
+      setError(true);
+    }
   };
 
   useEffect(() => {
@@ -103,6 +109,11 @@ function PopupWindow({ trigger, setTrigger, taskList, setTaskList }) {
               >
                 Create task
               </button>
+              {error ? (
+                <p>You need to enter at least task name and task day!</p>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>
