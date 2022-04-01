@@ -98,6 +98,154 @@ button:active {
   font-size: clamp(1rem, 2vw, 1.2rem);
 }
 
+.filter-sort-container {
+  width: 100%;
+  height: 15vh;
+  padding: 1rem 2rem;
+  background-color: #442525;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.filter-sort-container .container {
+  position: relative;
+  width: clamp(155px, 40%, 300px);
+}
+
+.filter-sort-container .container .selected {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(155, 106, 97, 0.897);
+  color: rgba(155, 106, 97, 0.897);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.filter-sort-container .container .selected p {
+  margin-bottom: 0;
+  pointer-events: none;
+}
+
+.filter-sort-container .container .options-container {
+  position: absolute;
+  top: 103%;
+  right: 0%;
+  width: 100%;
+  max-height: 0;
+  background-color: #442525;
+  border-radius: 10px;
+  border: 1px solid black;
+  padding: 1rem;
+  margin-left: 0.5rem;
+  opacity: 0;
+  overflow: hidden;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.filter-sort-container .container .options-container .option {
+  border-radius: 5px;
+  padding: 1rem 2rem;
+  color: rgba(212, 202, 202, 0.863);
+  cursor: pointer;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.filter-sort-container .container .options-container .option:hover {
+  background: rgba(155, 106, 97, 0.897);
+}
+
+.filter-sort-container .container .options-container .option input {
+  display: none;
+}
+
+.filter-sort-container .container .options-container .option label {
+  pointer-events: none;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+}
+
+.filter-sort-container .container .options-container.active {
+  max-height: 25vh;
+  opacity: 1;
+  overflow-y: scroll;
+}
+
+.filter-sort-container .container .options-container::-webkit-scrollbar {
+  width: 0.5rem;
+  background: rgba(155, 106, 97, 0.897);
+  border-radius: 0 1rem 1rem 0;
+}
+
+.filter-sort-container .container .options-container::-webkit-scrollbar-thumb {
+  background-color: rgba(212, 202, 202, 0.863);
+  border-radius: 0 1rem 1rem 0;
+}
+
+footer {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: #442525;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+footer .footer-container {
+  width: 100%;
+  height: 100%;
+  padding: 2rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+footer .footer-container .social-icons-container svg {
+  margin-right: 1rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  cursor: pointer;
+}
+
+footer .footer-container .footer-text-info,
+footer .footer-container .footer-thanks-text {
+  width: clamp(300px, 50%, 600px);
+  text-align: center;
+}
+
 header {
   width: 100%;
   padding: 1.5rem 0;
@@ -237,33 +385,7 @@ header .create-button-container {
   text-align: center;
 }
 
-.popup-container .lists-container {
-  padding: 1rem;
-  height: 90%;
-  width: 100%;
-}
-
-footer {
-  width: 100%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  background-color: #442525;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-footer .footer-container {
-  width: 100%;
-  height: 100%;
-  padding: 2rem 0;
+.popup-container .new-task {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -279,116 +401,10 @@ footer .footer-container {
           flex-direction: column;
 }
 
-footer .footer-container .social-icons-container svg {
-  margin-right: 1rem;
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  cursor: pointer;
-}
-
-footer .footer-container .footer-text-info,
-footer .footer-container .footer-thanks-text {
-  width: clamp(300px, 50%, 600px);
-  text-align: center;
-}
-
-.filter-sort-container {
-  width: 100%;
-  height: 15vh;
-  padding: 1rem 2rem;
-  background-color: #442525;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.filter-sort-container .container {
-  position: relative;
-  width: clamp(155px, 40%, 300px);
-}
-
-.filter-sort-container .container .selected {
-  width: 100%;
-  border-radius: 10px;
-  border: 1px solid rgba(155, 106, 97, 0.897);
-  color: rgba(155, 106, 97, 0.897);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  cursor: pointer;
+.popup-container .lists-container {
   padding: 1rem;
-}
-
-.filter-sort-container .container .selected p {
-  margin-bottom: 0;
-  pointer-events: none;
-}
-
-.filter-sort-container .container .options-container {
-  position: absolute;
-  top: 103%;
-  right: 0%;
+  height: 90%;
   width: 100%;
-  max-height: 0;
-  background-color: #442525;
-  border-radius: 10px;
-  border: 1px solid black;
-  padding: 1rem;
-  margin-left: 0.5rem;
-  opacity: 0;
-  overflow: hidden;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-
-.filter-sort-container .container .options-container .option {
-  border-radius: 5px;
-  padding: 1rem 2rem;
-  color: rgba(212, 202, 202, 0.863);
-  cursor: pointer;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-
-.filter-sort-container .container .options-container .option:hover {
-  background: rgba(155, 106, 97, 0.897);
-}
-
-.filter-sort-container .container .options-container .option input {
-  display: none;
-}
-
-.filter-sort-container .container .options-container .option label {
-  pointer-events: none;
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
-}
-
-.filter-sort-container .container .options-container.active {
-  max-height: 25vh;
-  opacity: 1;
-  overflow-y: scroll;
-}
-
-.filter-sort-container .container .options-container::-webkit-scrollbar {
-  width: 0.5rem;
-  background: rgba(155, 106, 97, 0.897);
-  border-radius: 0 1rem 1rem 0;
-}
-
-.filter-sort-container .container .options-container::-webkit-scrollbar-thumb {
-  background-color: rgba(212, 202, 202, 0.863);
-  border-radius: 0 1rem 1rem 0;
 }
 
 @media screen and (max-width: 750px) {
