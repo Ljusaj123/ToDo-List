@@ -105,16 +105,19 @@ function App() {
   useEffect(() => {
     switch (selectValue.sort) {
       case "Name (A-Z)":
-        setTaskList(taskListInit.sort(NameAZ));
+        //So, this line of code is wrong, as it modifies state (sorts the array, which is in the state) in place.
+        //And React “thinks” that setTaskList is being called with the same array that it already had, therefore no re-render.
+        // ### setTaskList(taskListInit.sort(NameAZ))
+        setTaskList([...taskListInit].sort(NameAZ));
         break;
       case "Name (Z-A)":
-        setTaskList(taskListInit.sort(NameZA));
+        setTaskList([...taskListInit].sort(NameZA));
         break;
       case "Day (A-Z)":
-        setTaskList(taskListInit.sort(DayAZ));
+        setTaskList([...taskListInit].sort(DayAZ));
         break;
       case "Day (Z-A)":
-        setTaskList(taskListInit.sort(DayZA));
+        setTaskList([...taskListInit].sort(DayZA));
         break;
       default:
         break;
