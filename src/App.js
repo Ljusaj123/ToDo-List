@@ -85,6 +85,9 @@ function App() {
 
   useEffect(() => {
     switch (selectValue.days) {
+      case "All":
+        setTaskList(taskListInit);
+        break;
       case "Today":
         setTaskList(taskListInit.filter((task) => task.day === "Today"));
         break;
@@ -147,6 +150,10 @@ function App() {
             <p>{showArrowDaysOptions ? <BiUpArrow /> : <BiDownArrow />}</p>
           </div>
           <div className="options-container" id="days">
+            <div className="option" onClick={handleOption}>
+              <input type="radio" className="radio" name="days" />
+              <label>All</label>
+            </div>
             {days.map((day, index) => {
               return (
                 <div className="option" onClick={handleOption} key={index}>
