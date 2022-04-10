@@ -186,7 +186,7 @@ function App() {
           <header>
             <h2>Task Name</h2>
           </header>
-          {taskListInit.length !== 0 ? (
+          {taskList.length !== 0 ? (
             taskList.map((task, index) => {
               return (
                 <div
@@ -205,7 +205,7 @@ function App() {
               );
             })
           ) : (
-            <p className="info-message">There are no tasks, make one!</p>
+            <p className="info-message">There are no tasks!</p>
           )}
         </div>
         <div className="task-container" id="task-info">
@@ -252,8 +252,8 @@ function App() {
           </div>
           <p className="footer-text-info">
             This is a personal project website made for practice. Application
-            holds all entered tasks and user can filter them, remove or check as
-            done.
+            holds all entered tasks and user can filter them by day, remove
+            them, sort by day or name or check as done.
           </p>
           <p className="footer-thanks-text">
             Thank you for having a look <BsHeartFill />
