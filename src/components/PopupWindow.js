@@ -36,7 +36,7 @@ function PopupWindow({ trigger, setTrigger, taskList, setTaskList }) {
 
   useEffect(() => {
     const random = Math.floor(Math.random() * 10000);
-    setTask({ ...task, id: random.toString() });
+    setTask((task) => ({ ...task, id: random.toString() }));
   }, [dayTrigger]);
 
   return (
