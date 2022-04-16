@@ -6,6 +6,7 @@ import FilterSort from "./components/FilterSort";
 import TaskContainers from "./components/TaskContainers";
 import PopupWindow from "./components/popups/PopupWindow";
 import Footer from "./components/Footer";
+import TaskContext from "./contexts/TaskContext";
 
 function App() {
   const [trigger, setTrigger] = useState(false);
@@ -16,10 +17,6 @@ function App() {
   );
   const [taskList, setTaskList] = useState(taskListInit);
   const [singleTask, setSingleTask] = useState("");
-  const [selectValue, setSelectValue] = useState({
-    days: "Select Day",
-    sort: "Sort by:",
-  });
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(taskListInit));
@@ -27,33 +24,24 @@ function App() {
   }, [taskListInit]);
 
   return (
-    <div className="todo">
-      <Header setTrigger={setTrigger} />
-
-      <FilterSort
-        selectValue={selectValue}
-        setSelectValue={setSelectValue}
-        taskListInit={taskListInit}
-        setTaskList={setTaskList}
-      />
-
-      <TaskContainers
-        taskList={taskList}
-        setSingleTask={setSingleTask}
-        singleTask={singleTask}
-        taskListInit={taskListInit}
-        setTaskListInit={setTaskListInit}
-      />
-
-      <PopupWindow
-        trigger={trigger}
-        setTrigger={setTrigger}
-        taskList={taskListInit}
-        setTaskList={setTaskListInit}
-      />
-
-      <Footer />
-    </div>
+    <TaskContext.Provider
+      value={{
+        taskListInit,
+        taskList,
+        setTaskListInit,
+        setTaskList,
+        trigger,
+        setTrigger,
+      }}
+    >
+      <div className="todo">
+        <Header />
+        <FilterSort />
+        <TaskContainers setSingleTask={setSingleTask} singleTask={singleTask} />
+        <PopupWindow />
+        <Footer />
+      </div>
+    </TaskContext.Provider>
   );
 }
 

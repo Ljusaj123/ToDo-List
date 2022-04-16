@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import TaskContext from "../contexts/TaskContext";
 import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 import days from "../const/Days";
 import sortingList from "../const/SortingList";
@@ -7,14 +8,15 @@ import NameZA from "../utilities/NameZA";
 import DayZA from "../utilities/DayZA";
 import DayAZ from "../utilities/DayAZ";
 
-function FilterSort({
-  selectValue,
-  setSelectValue,
-  taskListInit,
-  setTaskList,
-}) {
+function FilterSort() {
+  const { taskListInit, setTaskList } = useContext(TaskContext);
   const [showArrowDaysOptions, setShowArrowDaysOptions] = useState(false);
   const [showArrowSortOptions, setShowArrowSortOptions] = useState(false);
+
+  const [selectValue, setSelectValue] = useState({
+    days: "Select Day",
+    sort: "Sort by:",
+  });
 
   const handleSelect = (e) => {
     const container = e.target.nextSibling;

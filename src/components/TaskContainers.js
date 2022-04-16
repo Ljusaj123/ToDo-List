@@ -1,12 +1,7 @@
-import React from "react";
-
-function TaskContainers({
-  taskList,
-  setSingleTask,
-  singleTask,
-  taskListInit,
-  setTaskListInit,
-}) {
+import React, { useContext } from "react";
+import TaskContext from "../contexts/TaskContext";
+function TaskContainers({ setSingleTask, singleTask }) {
+  const { taskList, taskListInit, setTaskListInit } = useContext(TaskContext);
   const handleDelete = () => {
     const newList = taskListInit.filter((task) => {
       return task !== singleTask;

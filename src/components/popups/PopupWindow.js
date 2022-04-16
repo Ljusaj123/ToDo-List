@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import DaysPopupWindow from "./DaysPopupWindow";
 import ListPopupWindow from "./ListPopupWindow";
+import TaskContext from "../../contexts/TaskContext";
 
-function PopupWindow({ trigger, setTrigger, taskList, setTaskList }) {
+function PopupWindow() {
+  const { trigger, setTrigger, taskListInit, setTaskListInit } =
+    useContext(TaskContext);
   const initialTask = {
     id: "",
     name: "",
@@ -25,7 +28,7 @@ function PopupWindow({ trigger, setTrigger, taskList, setTaskList }) {
 
   const handleSubmit = () => {
     if (task.name && task.day) {
-      setTaskList([...taskList, task]);
+      setTaskListInit([...taskListInit, task]);
       setTask(initialTask);
       setTrigger(false);
       setError(false);
