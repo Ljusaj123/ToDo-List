@@ -3,10 +3,12 @@ import { AiOutlineClose } from "react-icons/ai";
 import DaysPopupWindow from "./DaysPopupWindow";
 import ListPopupWindow from "./ListPopupWindow";
 import TaskContext from "../../contexts/TaskContext";
+import PopupContext from "../../contexts/PopupContext";
 
 function PopupWindow() {
   const { trigger, setTrigger, taskListInit, setTaskListInit } =
     useContext(TaskContext);
+
   const initialTask = {
     id: "",
     name: "",
@@ -44,85 +46,85 @@ function PopupWindow() {
 
   return (
     <>
-      {trigger ? (
-        <div className="popup">
-          <div className="popup-container">
-            <header>
-              <h2>New Task</h2>
-            </header>
-            <div
-              className="close-popup-container"
-              onClick={() => setTrigger(false)}
-            >
-              <AiOutlineClose />
-            </div>
-            <div className="container task-name">
-              <input
-                type="text"
-                placeholder="Enter new task..."
-                name="name"
-                onChange={handleChange}
-              />
-            </div>
-            <div className="container task-description">
-              <textarea
-                placeholder="Enter notes..."
-                name="notes"
-                onChange={handleChange}
-              ></textarea>
-            </div>
-            <div className="container day-list">
-              <div className="button-container day">
-                <button
-                  className="select-btn"
-                  onClick={() => setDayTrigger(true)}
-                >
-                  Select day
-                </button>
-                {task.day ? <p>Day selected: {task.day}</p> : ""}
-                <DaysPopupWindow
-                  trigger={dayTrigger}
-                  setTrigger={setDayTrigger}
-                  task={task}
-                  setTask={setTask}
-                />
-              </div>
-              <div className="button-container day">
-                <button
-                  className="select-btn"
-                  onClick={() => setListTrigger(true)}
-                >
-                  Select list
-                </button>
-                {task.list ? <p>List selected: {task.list}</p> : ""}
-                <ListPopupWindow
-                  trigger={listTrigger}
-                  setTrigger={setListTrigger}
-                  task={task}
-                  setTask={setTask}
-                />
-              </div>
-            </div>
-
-            <div className="container new-task">
-              <button
-                type="submit"
-                className={task.name && task.day ? "create-btn" : "no-task-btn"}
-                onClick={handleSubmit}
+      <PopupContext.Provider value={{ task, setTask }}>
+        {trigger ? (
+          <div className="popup">
+            <div className="popup-container">
+              <header>
+                <h2>New Task</h2>
+              </header>
+              <div
+                className="close-popup-container"
+                onClick={() => setTrigger(false)}
               >
-                Create task
-              </button>
-              {error ? (
-                <p>You need to enter at least task name and task day!</p>
-              ) : (
-                ""
-              )}
+                <AiOutlineClose />
+              </div>
+              <div className="container task-name">
+                <input
+                  type="text"
+                  placeholder="Enter new task..."
+                  name="name"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="container task-description">
+                <textarea
+                  placeholder="Enter notes..."
+                  name="notes"
+                  onChange={handleChange}
+                ></textarea>
+              </div>
+              <div className="container day-list">
+                <div className="button-container day">
+                  <button
+                    className="select-btn"
+                    onClick={() => setDayTrigger(true)}
+                  >
+                    Select day
+                  </button>
+                  {task.day ? <p>Day selected: {task.day}</p> : ""}
+                  <DaysPopupWindow
+                    trigger={dayTrigger}
+                    setTrigger={setDayTrigger}
+                  />
+                </div>
+                <div className="button-container day">
+                  <button
+                    className="select-btn"
+                    onClick={() => setListTrigger(true)}
+                  >
+                    Select list
+                  </button>
+                  {task.list ? <p>List selected: {task.list}</p> : ""}
+                  <ListPopupWindow
+                    trigger={listTrigger}
+                    setTrigger={setListTrigger}
+                  />
+                </div>
+              </div>
+
+              <div className="container new-task">
+                <button
+                  type="submit"
+                  className={
+                    task.name && task.day ? "create-btn" : "no-task-btn"
+                  }
+                  onClick={handleSubmit}
+                >
+                  Create task
+                </button>
+                {error ? (
+                  <p>You need to enter at least task name and task day!</p>
+                ) : (
+                  ""
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      ) : (
-        ""
-      )}
+        ) : (
+          ""
+        )}
+      </PopupContext.Provider>
     </>
   );
 }

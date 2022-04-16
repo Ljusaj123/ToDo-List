@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import days from "../../const/Days";
 import { AiOutlineClose } from "react-icons/ai";
-function DaysPopupWindow({ trigger, setTrigger, setTask, task }) {
+import PopupContext from "../../contexts/PopupContext";
+
+function DaysPopupWindow({ setTrigger, trigger }) {
+  const { setTask, task } = useContext(PopupContext);
+
   const handleSubmit = (e) => {
     const { name, value } = e.target;
     setTask({ ...task, [name]: value });

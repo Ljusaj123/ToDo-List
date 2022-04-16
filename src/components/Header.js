@@ -3,6 +3,7 @@ import TaskContext from "../contexts/TaskContext";
 
 function Header() {
   const { setTrigger } = useContext(TaskContext);
+
   return (
     <header className="title-container">
       <h1>Simple ToDo App</h1>
