@@ -1,5 +1,5 @@
 import React from "react";
-import lists from "../const/List";
+import lists from "../../const/List";
 import { AiOutlineClose } from "react-icons/ai";
 function ListPopupWindow({ trigger, setTrigger, setTask, task }) {
   const handleSubmit = (e) => {
