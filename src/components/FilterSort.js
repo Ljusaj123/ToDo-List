@@ -13,7 +13,7 @@ function FilterSort() {
   const [showArrowDaysOptions, setShowArrowDaysOptions] = useState(false);
   const [showArrowSortOptions, setShowArrowSortOptions] = useState(false);
 
-  const [selectValue, setSelectValue] = useState({
+  const [initSelectValue, setInitSelectValue] = useState({
     days: "Select Day",
     sort: "Sort by:",
   });
@@ -34,10 +34,9 @@ function FilterSort() {
   };
 
   const handleOption = (e) => {
-    const name = e.target.children[0].name;
-    const value = e.target.children[1].innerHTML;
-    setSelectValue({
-      ...selectValue,
+    const { name, value } = e.target.firstChild;
+    setInitSelectValue({
+      ...initSelectValue,
       [name]: value,
     });
     const container = e.target.parentElement;
@@ -56,7 +55,7 @@ function FilterSort() {
   };
 
   useEffect(() => {
-    switch (selectValue.days) {
+    switch (initSelectValue.days) {
       case "All":
         setTaskList(taskListInit);
         break;
@@ -75,10 +74,10 @@ function FilterSort() {
       default:
         break;
     }
-  }, [selectValue.days, setTaskList, taskListInit]);
+  }, [initSelectValue.days, setTaskList, taskListInit]);
 
   useEffect(() => {
-    switch (selectValue.sort) {
+    switch (initSelectValue.sort) {
       case "Name (A-Z)":
         //So, this line of code is wrong, as it modifies state (sorts the array, which is in the state) in place.
         //And React “thinks” that setTaskList is being called with the same array that it already had, therefore no re-render.
@@ -97,24 +96,30 @@ function FilterSort() {
       default:
         break;
     }
-  }, [selectValue.sort, setTaskList, taskListInit]);
+  }, [initSelectValue.sort, setTaskList, taskListInit]);
 
   return (
     <div className="filter-sort-container">
       <div className="container filter-by-day">
         <div className="selected" onClick={handleSelect}>
-          <p>{selectValue.days}</p>
+          <p>{initSelectValue.days}</p>
           <p>{showArrowDaysOptions ? <BiUpArrow /> : <BiDownArrow />}</p>
         </div>
         <div className="options-container" id="days">
           <div className="option" onClick={handleOption}>
-            <input type="radio" className="radio" name="days" />
+            <input type="radio" className="radio" name="days" value="All" />
             <label>All</label>
           </div>
           {days.map((day, index) => {
             return (
               <div className="option" onClick={handleOption} key={index}>
-                <input type="radio" className="radio" id={day} name="days" />
+                <input
+                  type="radio"
+                  className="radio"
+                  id={day}
+                  value={day}
+                  name="days"
+                />
                 <label>{day}</label>
               </div>
             );
@@ -123,14 +128,20 @@ function FilterSort() {
       </div>
       <div className="container sort">
         <div className="selected" onClick={handleSelect}>
-          <p>{selectValue.sort}</p>
+          <p>{initSelectValue.sort}</p>
           <p>{showArrowSortOptions ? <BiUpArrow /> : <BiDownArrow />}</p>
         </div>
         <div className="options-container" id="sort">
           {sortingList.map((sort, index) => {
             return (
               <div className="option" onClick={handleOption} key={index}>
-                <input type="radio" className="radio" id={sort} name="sort" />
+                <input
+                  type="radio"
+                  className="radio"
+                  id={sort}
+                  name="sort"
+                  value={sort}
+                />
                 <label>{sort}</label>
               </div>
             );
