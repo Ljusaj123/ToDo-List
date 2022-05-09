@@ -1,7 +1,7 @@
 const DayZA = (a, b) => {
-  if (a.day.toLowerCase() > b.day.toLowerCase()) {
+  if (a.day > b.day) {
     return -1;
-  } else if (b.day.toLowerCase() > a.day.toLowerCase()) {
+  } else if (b.day > a.day) {
     return 1;
   } else {
     return 0;
