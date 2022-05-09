@@ -1,9 +1,6 @@
-import React, { useContext } from "react";
-import TaskContext from "../contexts/TaskContext";
+import React from "react";
 
-function Header() {
-  const { setTrigger } = useContext(TaskContext);
-
+function Header({ setTrigger }) {
   return (
     <header className="title-container">
       <h1>Simple ToDo App</h1>
