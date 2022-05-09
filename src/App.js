@@ -9,12 +9,12 @@ import Footer from "./components/Footer";
 import TaskContext from "./contexts/TaskContext";
 
 function App() {
+  const localStorageData = localStorage.getItem("tasks")
+    ? JSON.parse(localStorage.getItem("tasks"))
+    : [];
+
+  const [taskListInit, setTaskListInit] = useState(localStorageData);
   const [trigger, setTrigger] = useState(false);
-  const [taskListInit, setTaskListInit] = useState(
-    localStorage.getItem("tasks")
-      ? JSON.parse(localStorage.getItem("tasks"))
-      : []
-  );
   const [taskList, setTaskList] = useState(taskListInit);
   const [singleTask, setSingleTask] = useState("");
 
@@ -24,24 +24,25 @@ function App() {
   }, [taskListInit]);
 
   return (
-    <TaskContext.Provider
-      value={{
-        taskListInit,
-        taskList,
-        setTaskListInit,
-        setTaskList,
-        trigger,
-        setTrigger,
-      }}
-    >
-      <div className="todo">
-        <Header />
+    <div className="todo">
+      <TaskContext.Provider
+        value={{
+          taskListInit,
+          setTaskListInit,
+          setTaskList,
+        }}
+      >
+        <Header setTrigger={setTrigger} />
         <FilterSort />
-        <TaskContainers setSingleTask={setSingleTask} singleTask={singleTask} />
-        <PopupWindow />
-        <Footer />
-      </div>
-    </TaskContext.Provider>
+        <TaskContainers
+          setSingleTask={setSingleTask}
+          singleTask={singleTask}
+          taskList={taskList}
+        />
+        <PopupWindow trigger={trigger} setTrigger={setTrigger} />
+      </TaskContext.Provider>
+      <Footer />
+    </div>
   );
 }
 
