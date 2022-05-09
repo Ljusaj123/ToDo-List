@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import TaskContext from "../contexts/TaskContext";
 
-function TaskContainers({ setSingleTask, singleTask }) {
-  const { taskList, taskListInit, setTaskListInit } = useContext(TaskContext);
+function TaskContainers({ setSingleTask, singleTask, taskList }) {
+  const { taskListInit, setTaskListInit } = useContext(TaskContext);
 
   const handleDelete = () => {
     const newList = taskListInit.filter((task) => {
@@ -13,7 +13,7 @@ function TaskContainers({ setSingleTask, singleTask }) {
   };
 
   const toggleComplete = (id) => {
-    const newTodos = [...taskListInit].map((task) => {
+    const newTodos = taskList.map((task) => {
       if (task.id === id) {
         task.completed = !task.completed;
       }
@@ -30,11 +30,11 @@ function TaskContainers({ setSingleTask, singleTask }) {
           <h2>Task Name</h2>
         </header>
         {taskList.length !== 0 ? (
-          taskList.map((task, index) => {
+          taskList.map((task) => {
             return (
               <div
                 className={task.completed ? "task crossed" : "task"}
-                key={index}
+                key={task.id}
                 onClick={() => setSingleTask(task)}
               >
                 <input
