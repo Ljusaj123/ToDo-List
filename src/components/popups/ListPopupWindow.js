@@ -1,12 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import lists from "../../const/List";
 import { AiOutlineClose } from "react-icons/ai";
-import PopupContext from "../../contexts/PopupContext";
 
-function ListPopupWindow({ setTrigger, trigger }) {
-  const { setTask, task } = useContext(PopupContext);
-  
-
+function ListPopupWindow({ setTrigger, trigger, setTask, task }) {
   const handleSubmit = (e) => {
     const { name, value } = e.target;
     setTask({ ...task, [name]: value });
