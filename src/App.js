@@ -17,7 +17,6 @@ function App() {
   const [open, setOpen] = useState(false);
   const [taskList, setTaskList] = useState(taskListInit);
   const [singleTask, setSingleTask] = useState("");
-  console.log(open);
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(taskListInit));
