@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
+import ReactDOM from "react-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import DaysPopupWindow from "./DaysPopupWindow";
 import ListPopupWindow from "./ListPopupWindow";
 import TaskContext from "../../contexts/TaskContext";
 
-function PopupWindow({ trigger, setTrigger }) {
+function PopupWindow({ open, setOpen }) {
   const { taskListInit, setTaskListInit } = useContext(TaskContext);
 
   const initialTask = {
@@ -33,7 +34,7 @@ function PopupWindow({ trigger, setTrigger }) {
     if (task.name && task.day) {
       setTaskListInit([...taskListInit, task]);
       setTask(initialTask);
-      setTrigger(false);
+      setOpen(false);
     } else {
       setError({ ...error, isError: true });
     }
@@ -51,85 +52,78 @@ function PopupWindow({ trigger, setTrigger }) {
   // }, [error, error.isError]);
   // fali useEffect cleanup
 
-  return (
-    <>
-      {console.log(error)}
-      {trigger ? (
-        <div className="popup">
-          <div className="popup-container">
-            <header>
-              <h2>New Task</h2>
-            </header>
-            <div
-              className="close-popup-container"
-              onClick={() => setTrigger(false)}
-            >
-              <AiOutlineClose />
-            </div>
-            <div className="container task-name">
-              <input
-                type="text"
-                placeholder="Enter new task..."
-                name="name"
-                onChange={handleChange}
+  if (!open) return null;
+
+  return ReactDOM.createPortal(
+      <div className="popup">
+        <div className="popup-container">
+          <header>
+            <h2>New Task</h2>
+          </header>
+          <div className="close-popup-container" onClick={() => setOpen(false)}>
+            <AiOutlineClose />
+          </div>
+          <div className="container task-name">
+            <input
+              type="text"
+              placeholder="Enter new task..."
+              name="name"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="container task-description">
+            <textarea
+              placeholder="Enter notes..."
+              name="notes"
+              onChange={handleChange}
+            ></textarea>
+          </div>
+          <div className="container day-list">
+            <div className="button-container day">
+              <button
+                className="select-btn"
+                onClick={() => setDayTrigger(true)}
+              >
+                Select day
+              </button>
+              {task.day ? <p>Day selected: {task.day}</p> : ""}
+              <DaysPopupWindow
+                trigger={dayTrigger}
+                setTrigger={setDayTrigger}
+                task={task}
+                setTask={setTask}
               />
             </div>
-            <div className="container task-description">
-              <textarea
-                placeholder="Enter notes..."
-                name="notes"
-                onChange={handleChange}
-              ></textarea>
-            </div>
-            <div className="container day-list">
-              <div className="button-container day">
-                <button
-                  className="select-btn"
-                  onClick={() => setDayTrigger(true)}
-                >
-                  Select day
-                </button>
-                {task.day ? <p>Day selected: {task.day}</p> : ""}
-                <DaysPopupWindow
-                  trigger={dayTrigger}
-                  setTrigger={setDayTrigger}
-                  task={task}
-                  setTask={setTask}
-                />
-              </div>
-              <div className="button-container day">
-                <button
-                  className="select-btn"
-                  onClick={() => setListTrigger(true)}
-                >
-                  Select list
-                </button>
-                {task.list ? <p>List selected: {task.list}</p> : ""}
-                <ListPopupWindow
-                  trigger={listTrigger}
-                  setTrigger={setListTrigger}
-                  task={task}
-                  setTask={setTask}
-                />
-              </div>
-            </div>
-
-            <div className="container new-task">
+            <div className="button-container day">
               <button
-                type="submit"
-                className={task.name && task.day ? "create-btn" : "no-task-btn"}
-                onClick={handleSubmit}
+                className="select-btn"
+                onClick={() => setListTrigger(true)}
               >
-                Create task
+                Select list
               </button>
-              {error.isError ? <p>{error.message}</p> : ""}
+              {task.list ? <p>List selected: {task.list}</p> : ""}
+              <ListPopupWindow
+                trigger={listTrigger}
+                setTrigger={setListTrigger}
+                task={task}
+                setTask={setTask}
+              />
             </div>
           </div>
+
+          <div className="container new-task">
+            <button
+              type="submit"
+              className={task.name && task.day ? "create-btn" : "no-task-btn"}
+              onClick={handleSubmit}
+            >
+              Create task
+            </button>
+            {error.isError ? <p>{error.message}</p> : ""}
+          </div>
         </div>
-      ) : (
-        ""
-      )}
-    </>
+      </div>,
+    document.getElementById("portal-root")
   );
 }
 

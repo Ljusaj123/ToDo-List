@@ -14,9 +14,10 @@ function App() {
     : [];
 
   const [taskListInit, setTaskListInit] = useState(localStorageData);
-  const [trigger, setTrigger] = useState(false);
+  const [open, setOpen] = useState(false);
   const [taskList, setTaskList] = useState(taskListInit);
   const [singleTask, setSingleTask] = useState("");
+  console.log(open);
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(taskListInit));
@@ -32,14 +33,14 @@ function App() {
           setTaskList,
         }}
       >
-        <Header setTrigger={setTrigger} />
+        <Header setOpen={setOpen} />
         <FilterSort />
         <TaskContainers
           setSingleTask={setSingleTask}
           singleTask={singleTask}
           taskList={taskList}
         />
-        <PopupWindow trigger={trigger} setTrigger={setTrigger} />
+        <PopupWindow open={open} setOpen={setOpen} />
       </TaskContext.Provider>
       <Footer />
     </div>
