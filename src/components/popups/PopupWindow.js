@@ -51,12 +51,14 @@ function PopupWindow({ open, setOpen }) {
     setTask((task) => ({ ...task, id: random.toString() }));
   }, [dayTrigger]);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setError({ ...error, isError: false });
-  //   }, 2000);
-  // }, [error, error.isError]);
-  // fali useEffect cleanup
+  useEffect(() => {
+    const abortCont = new AbortController();
+    setTimeout(() => {
+      setError({ ...error, isError: false }, { signal: abortCont.signal });
+    }, 5000);
+
+    return abortCont.abort();
+  }, [error, error.isError]);
 
   if (!open) return null;
 
