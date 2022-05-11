@@ -47,6 +47,12 @@ a {
   text-decoration: none;
 }
 
+label {
+  color: rgba(212, 202, 202, 0.863);
+  margin: 0.5rem 0;
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+}
+
 button {
   padding: 1rem;
   border: none;
@@ -70,6 +76,7 @@ button:active {
 .create-btn {
   border-radius: 10px;
   background-color: rgba(155, 106, 97, 0.897);
+  color: rgba(253, 253, 253, 0.966);
   font-size: clamp(1rem, 2vw, 1.3rem);
 }
 
@@ -506,7 +513,8 @@ header .create-button-container {
   text-align: right;
 }
 
-.tasks-containers .task-container .task input {
+.tasks-containers .task-container .task input,
+.tasks-containers .task-container .task label {
   cursor: pointer;
   margin-right: 2rem;
 }

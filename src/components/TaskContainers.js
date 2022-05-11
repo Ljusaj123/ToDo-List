@@ -41,8 +41,9 @@ function TaskContainers({ setSingleTask, singleTask, taskList }) {
                   type="checkbox"
                   onChange={() => toggleComplete(task.id)}
                   checked={task.completed}
+                  id={task.id}
                 />
-                <p>{task.name}</p>
+                <label htmlFor={task.id}>{task.name}</label>
                 <p className="day">{task.day}</p>
               </div>
             );

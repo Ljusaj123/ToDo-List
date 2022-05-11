@@ -39,3 +39,9 @@ ul {
 a {
   text-decoration: none;
 }
+
+label {
+  color: $light-white-pink;
+  margin: 0.5rem 0;
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+}

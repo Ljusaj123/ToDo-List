@@ -46,7 +46,8 @@
       & .day {
         text-align: right;
       }
-      & input {
+      & input,
+      label {
         cursor: pointer;
         margin-right: 2rem;
       }
