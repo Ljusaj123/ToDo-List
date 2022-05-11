@@ -1,3 +1,6 @@
-const days = ["Today", "Tommorow", "Next Week", "Never"];
+const days = {
+  name: "day",
+  value: ["Today", "Tommorow", "Next Week", "Never"],
+};
 
 export default days;

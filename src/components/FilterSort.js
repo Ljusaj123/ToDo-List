@@ -110,7 +110,7 @@ function FilterSort() {
             <input type="radio" className="radio" name="days" value="All" />
             <label>All</label>
           </div>
-          {days.map((day, index) => {
+          {days.value.map((day, index) => {
             return (
               <div className="option" onClick={handleOption} key={index}>
                 <input

@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import ReactDOM from "react-dom";
 import { AiOutlineClose } from "react-icons/ai";
-import DaysPopupWindow from "./DaysPopupWindow";
 import ListPopupWindow from "./ListPopupWindow";
 import TaskContext from "../../contexts/TaskContext";
+import days from "../../const/Days";
+import tags from "../../const/Tags";
 
 function PopupWindow({ open, setOpen }) {
   const { taskListInit, setTaskListInit } = useContext(TaskContext);
@@ -13,7 +14,7 @@ function PopupWindow({ open, setOpen }) {
     name: "",
     notes: "",
     day: "",
-    list: "",
+    tag: "",
     completed: false,
   };
 
@@ -51,19 +52,19 @@ function PopupWindow({ open, setOpen }) {
     setTask((task) => ({ ...task, id: random.toString() }));
   }, [dayTrigger]);
 
-  useEffect(() => {
-    const abortCont = new AbortController();
-    setTimeout(() => {
-      setError(
-        (e) => {
-          return { ...e, isError: false };
-        },
-        { signal: abortCont.signal }
-      );
-    }, 5000);
+  // useEffect(() => {
+  //   const abortCont = new AbortController();
+  //   setTimeout(() => {
+  //     setError(
+  //       (e) => {
+  //         return { ...e, isError: false };
+  //       },
+  //       { signal: abortCont.signal }
+  //     );
+  //   }, 5000);
 
-    return abortCont.abort();
-  }, [error, error.isError]);
+  //   return abortCont.abort();
+  // }, [error]);
 
   if (!open) return null;
 
@@ -97,23 +98,25 @@ function PopupWindow({ open, setOpen }) {
               Select day
             </button>
             {task.day ? <p>Day selected: {task.day}</p> : ""}
-            <DaysPopupWindow
+            <ListPopupWindow
               trigger={dayTrigger}
               setTrigger={setDayTrigger}
               task={task}
               setTask={setTask}
+              data={days}
             />
           </div>
           <div className="button-container day">
             <button className="select-btn" onClick={() => setListTrigger(true)}>
               Select list
             </button>
-            {task.list ? <p>List selected: {task.list}</p> : ""}
+            {task.tag ? <p>List selected: {task.tag}</p> : ""}
             <ListPopupWindow
               trigger={listTrigger}
               setTrigger={setListTrigger}
               task={task}
               setTask={setTask}
+              data={tags}
             />
           </div>
         </div>
