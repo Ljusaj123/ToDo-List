@@ -9,6 +9,11 @@ import tags from "../../const/Tags";
 function PopupWindow({ open, setOpen }) {
   const { taskListInit, setTaskListInit } = useContext(TaskContext);
 
+  const initialSelect = {
+    day: "Select Day",
+    tag: "Select Tag",
+  };
+
   const initialTask = {
     id: "",
     name: "",
@@ -17,6 +22,8 @@ function PopupWindow({ open, setOpen }) {
     tag: "",
     completed: false,
   };
+
+  const [initSelectValue, setInitSelectValue] = useState(initialSelect);
 
   const [listTrigger, setListTrigger] = useState(false);
   const [dayTrigger, setDayTrigger] = useState(false);
@@ -34,6 +41,23 @@ function PopupWindow({ open, setOpen }) {
   const handleClose = () => {
     setOpen(false);
     setError({ ...error, isError: false });
+  };
+
+  const removeTag = () => {
+    setInitSelectValue({
+      ...initSelectValue,
+      tag: initialSelect.tag,
+    });
+
+    setTask({ ...task, tag: "" });
+  };
+  const removeDay = () => {
+    setInitSelectValue({
+      ...initSelectValue,
+      day: initialSelect.day,
+    });
+
+    setTask({ ...task, day: "" });
   };
 
   const handleSubmit = () => {
@@ -96,28 +120,33 @@ function PopupWindow({ open, setOpen }) {
         <div className="container day-list">
           <div className="button-container day">
             <button className="select-btn" onClick={() => setDayTrigger(true)}>
-              Select day
+              {initSelectValue.day}
             </button>
-            {task.day ? <p>Day selected: {task.day}</p> : ""}
+            {task.day ? <p onClick={() => removeDay()}>remove</p> : ""}
             <ListPopupWindow
               trigger={dayTrigger}
               setTrigger={setDayTrigger}
               task={task}
               setTask={setTask}
               data={days}
+              setInitSelectValue={setInitSelectValue}
+              initSelectValue={initSelectValue}
             />
           </div>
           <div className="button-container day">
             <button className="select-btn" onClick={() => setListTrigger(true)}>
-              Select list
+              {initSelectValue.tag}
             </button>
-            {task.tag ? <p>List selected: {task.tag}</p> : ""}
+            {console.log(task)}
+            {task.tag ? <p onClick={() => removeTag()}>remove</p> : ""}
             <ListPopupWindow
               trigger={listTrigger}
               setTrigger={setListTrigger}
               task={task}
               setTask={setTask}
               data={tags}
+              setInitSelectValue={setInitSelectValue}
+              initSelectValue={initSelectValue}
             />
           </div>
         </div>

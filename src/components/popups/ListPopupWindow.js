@@ -1,10 +1,22 @@
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
-function ListPopupWindow({ setTrigger, trigger, setTask, task, data }) {
+function ListPopupWindow({
+  setTrigger,
+  trigger,
+  setTask,
+  task,
+  data,
+  setInitSelectValue,
+  initSelectValue,
+}) {
   const handleSubmit = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
+    setInitSelectValue({
+      ...initSelectValue,
+      [name]: value,
+    });
+
     setTask({ ...task, [name]: value });
     setTrigger(false);
   };
