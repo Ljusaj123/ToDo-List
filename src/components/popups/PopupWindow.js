@@ -54,7 +54,12 @@ function PopupWindow({ open, setOpen }) {
   useEffect(() => {
     const abortCont = new AbortController();
     setTimeout(() => {
-      setError({ ...error, isError: false }, { signal: abortCont.signal });
+      setError(
+        (e) => {
+          return { ...e, isError: false };
+        },
+        { signal: abortCont.signal }
+      );
     }, 5000);
 
     return abortCont.abort();
