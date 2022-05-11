@@ -52,19 +52,20 @@ function PopupWindow({ open, setOpen }) {
     setTask((task) => ({ ...task, id: random.toString() }));
   }, [dayTrigger]);
 
-  // useEffect(() => {
-  //   const abortCont = new AbortController();
-  //   setTimeout(() => {
-  //     setError(
-  //       (e) => {
-  //         return { ...e, isError: false };
-  //       },
-  //       { signal: abortCont.signal }
-  //     );
-  //   }, 5000);
+  useEffect(() => {
+    const abortCont = new AbortController();
+    setTimeout(() => {
+      setError(
+        (e) => {
+          return { ...e, isError: false };
+        },
+        { signal: abortCont.signal }
+      );
+    }, 5000);
 
-  //   return abortCont.abort();
-  // }, [error]);
+    return abortCont.abort();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error.isError === true]);
 
   if (!open) return null;
 
