@@ -71,4 +71,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## Link
 
-[https://626c4ff92943f70ba4298800--warm-naiad-729e63.netlify.app/]
+[https://main--warm-naiad-729e63.netlify.app/]
